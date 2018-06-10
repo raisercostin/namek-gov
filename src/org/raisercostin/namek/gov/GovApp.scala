@@ -1,15 +1,37 @@
 package org.raisercostin.namek.gov
 
 object GovApp {
-  case class Node(id:String){
-    def toDot = s"$id"
-  }
-  case class Edge(src:Node, dst:Node, var attributes:Map[String,String] = Map()){
-    def addAttribute(src:String,dest:String*):Edge ={
+
+  def escape(text:String) =
+    decompose(if(!isSimpleDotId(text)) s""""${text.replace("\n","\\n")}"""" else text)
+
+  def decompose(s: String): String = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+
+  //See An ID is one of the following: http://www.graphviz.org/doc/info/lang.html
+  def isSimpleDotId(text:String):Boolean =
+    //text.matches("""^[a-zA-Z\0200-\0377_][a-zA-Z\0200-\0377_0-9]*$""")
+    text.matches("""^[a-zA-Z_0-9]*$""")
+
+  trait WithAttributes{self=>
+    var attributes:Map[String,String] = Map()
+    def addAttribute(src:String,dest:String*):self.type ={
       attributes += src -> dest.head
-      this
+      self
     }
-    def toDot = s"""${src.toDot}->${dst.toDot} [${attributes.map(x=>x._1+"="+x._2).mkString(",")}]"""
+    def addAttributes(args: (String, Any)*):self.type = addAttributes2(args.toMap.mapValues(_.toString))
+    private def addAttributes2(map: Map[String, String]):self.type = {
+      attributes ++= map
+      self
+    }
+    //see https://en.wikipedia.org/wiki/DOT_(graph_description_language)
+    def toDot:String = if(attributes.isEmpty) "" else s""" [${attributes.map(x=>escape(x._1)+"="+escape(x._2)).mkString(",")}]"""
+  }
+
+  case class Node(id:String) extends WithAttributes {
+    override def toDot:String = s"$id${super.toDot}"
+  }
+  case class Edge(src:Node, dst:Node) extends WithAttributes {
+    override def toDot:String = s"""${src.id}->${dst.id}${super.toDot}"""
   }
 
   import scala.language.dynamics
@@ -23,6 +45,12 @@ object GovApp {
     }
     def findOrCreateNode(nodeId: String):Node =
       n.find(_.id==nodeId).getOrElse(addNode(nodeId))
+    def findOrCreateNodeWithParent(nodeId: String, parent:Node):Node = {
+      val node = findOrCreateNode(nodeId)
+      addEdge(parent.id,nodeId).addAttribute("label","include").addAttribute("kind","include")
+      node
+    }
+
     private def addNode(src:String):Node = {
       val node = Node(src)
       n += node
@@ -34,15 +62,29 @@ object GovApp {
         |digraph G {
         |  compound=true;
         |  ratio = fill;
-        |	node [style=filled, color="0.650 0.200 1.000"];
+        |  node [style=filled, color="0.650 0.200 1.000"];
         |  rank="sink"
         |  rankdir=TB
-        |  ${e.map(_.toDot).mkString("\n")}
-        |  }
+        |  ${n.map(_.toDot).mkString("\n  ")}
+        |  ${e.map(_.toDot).mkString("\n  ")}
+        |}
       """.stripMargin
   }
   class NodeBuilder(graph:Graph) extends Dynamic {
-    def selectDynamic(name:String): NodeBuilder = {graph.findOrCreateNode(name);this}
+    def selectDynamic(name:String): NodeBuilder2 = new NodeBuilder2(graph,graph.findOrCreateNode(name))
+    def applyDynamicNamed(name:String)(args: (String, Any)*):NodeBuilder2 = {
+      val node = graph.findOrCreateNode(name)
+      node.addAttributes(args:_*)
+      new NodeBuilder2(graph,node)
+    }
+  }
+  class NodeBuilder2(graph:Graph, parent:Node) extends Dynamic {
+    def selectDynamic(name:String): NodeBuilder2 = new NodeBuilder2(graph,graph.findOrCreateNodeWithParent(name,parent))
+    def applyDynamicNamed(name:String)(args: (String, Any)*):NodeBuilder2 = {
+      val node = graph.findOrCreateNodeWithParent(name,parent)
+      node.addAttributes(args:_*)
+      new NodeBuilder2(graph,node)
+    }
   }
   class EdgeBuilder(graph:Graph) extends Dynamic {
     def selectDynamic(src:String): EdgeBuilder2 = new EdgeBuilder2(graph,src)
@@ -52,20 +94,28 @@ object GovApp {
   }
   class EdgeBuilder3(graph:Graph, edge:Edge) extends Dynamic {
     def applyDynamic(name:String)(params:String*): EdgeBuilder3 = {edge.addAttribute(name,params:_*);this}
+    def applyDynamicNamed(name:String)(args: (String, Any)*):EdgeBuilder3 = {
+      edge.addAttributes(args:_*)
+      this
+    }
   }
 
   def main(args: Array[String]): Unit = {
-    println("hi")
+    println("//view at http://www.webgraphviz.com/")
+
     val graph = new Graph()
-    graph.nodes.cedo.cedo2.cedo3
-    graph.edge.cedo.cedo2.description("gigi")
-    graph.edge.cedo.cedo2.label("aaa").constraint("gigi")
+    graph.nodes.international.cedo(label="CEDO\nCurtea European a Drepturilor Omului")
+    graph.nodes.judiciar(label="judiciar (aplică și interpretează legile)")
+    graph.nodes.judiciar.ccr(label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani")
+    graph.nodes.judiciar.iccj(label="ICCJ\nÎnalta Curte de Casație și Justiție.")
+    graph.edge.cedo.iccj.attributes(label="corectie decizii", kind="control")
     println(graph.toDot)
   }
 }
-
-//define nodes
-//define edges
-//define subnodes
-//define hiper edges (conditii)
-//control type
+//subgraph clusterJudiciar {
+//  label="judiciar (aplică și interpretează legile)"
+//  CEDO [label="CEDO\nCurtea European a Drepturilor Omului"]
+//  CCR [label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani"];
+//  ICCJ [label="ICCJ\nÎnalta Curte de Casație și Justiție."];
+//  CEDO->ICCJ [label="corectie decizii"]
+//}

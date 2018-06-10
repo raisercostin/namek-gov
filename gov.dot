@@ -1,0 +1,81 @@
+digraph G {
+  compound=true;
+  ratio = fill;
+	node [style=filled, color="0.650 0.200 1.000"];
+  rank="sink"
+  rankdir=TB
+  subgraph clusterJudiciar {
+    label="judiciar (aplică și interpretează legile)"
+    CEDO [label="CEDO\nCurtea European a Drepturilor Omului"]
+    CCR [label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani"];
+    ICCJ [label="ICCJ\nÎnalta Curte de Casație și Justiție."];
+    CEDO->ICCJ [label="corectie decizii"]
+  }
+  subgraph clusterLegislativ {
+    label=legislativ
+    subgraph clusterParlament{
+      label=parlament
+      subgraph clusterDeputati{
+        label="Camera Deputatilor"
+        "Preşedintele Camerei Deputaţilor"
+        deputati
+      }
+      subgraph clusterSenat{
+        label="Senat"
+        "Preşedintele Senatului"
+        senatori
+      }
+    }
+    subgraph clusterLegi{
+      label=legi
+      constitutie;
+      legi;
+      regulamente;
+      constitutie->legi;
+      legi->regulamente;
+    }
+  }
+  subgraph clusterExecutiv {
+    label="executiv(guvernează - implementarea legilor în practică și cu administrarea birocrației de stat)|Guvernul însă poate propune legi spre aprobare de către legislativ."
+    presedinte [references="http://www.contributors.ro/dezbatere/despre-o-inertie-politica-si-constitutionala-presedintele-romaniei-parte-a-puterii-executive/"];
+    subgraph clusterGuvern {
+      label=Guvern
+      primMinistru;
+      ministru;
+      primMinistru->ministru[label="numeste/demite"]
+      presedinte->primMinistru[label="numeste"]
+    }
+  }
+  subgraph clusterPresa {
+    label=presa
+    presa;
+  }
+  deputati->CCR [label="numeste\n3 judecatori",ltail=clusterDeputati ];
+  senatori->CCR [label="numeste\n3 judecatori",ltail=clusterSenat];
+  presedinte->CCR [label="numeste\n3 judecatori"];
+  
+  "partide politice"
+  "sindicatele"
+  "patronatele"
+  "asociatiile profesionale"
+  "cetatenii"
+  
+
+    subgraph clusterFord {
+        label="Ford"
+        Ford[shape="none"][style="invis"][label=""];
+        Mustang
+        Thunderbird
+    }
+    subgraph clusterChevrolet {
+        label="Chevrolet"
+        shape="circle"
+        Chevrolet[shape="none"][style="invis"][label=""];
+        Camero
+    }
+    Ford -> Make [label="public"][ltail ="clusterFord"];
+    Chevrolet -> Make [label="public"][ltail ="clusterChevrolet"];
+    Mustang -> Vehicle [label="private"];
+    Thunderbird -> Vehicle [label="private"];
+    Camero -> Vehicle [label="private"];
+}
