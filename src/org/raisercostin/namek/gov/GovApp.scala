@@ -13,14 +13,15 @@ object GovApp {
     text.matches("""^[a-zA-Z_0-9]*$""")
 
   trait WithAttributes{self=>
-    var attributes:Map[String,String] = Map()
+    def attributes:Map[String,String] = attr
+    var attr:Map[String,String] = Map()
     def addAttribute(src:String,dest:String):self.type ={
-      attributes += src -> dest
+      attr += src -> dest
       self
     }
     def addAttributes(args: (String, Any)*):self.type = addAttributes2(args.toMap.mapValues(_.toString))
     private def addAttributes2(map: Map[String, String]):self.type = {
-      attributes ++= map
+      attr ++= map
       self
     }
     //see https://en.wikipedia.org/wiki/DOT_(graph_description_language)
@@ -31,6 +32,11 @@ object GovApp {
     override def toDot:String = s"$id${super.toDot}"
   }
   case class Edge(src:Node, dst:Node) extends WithAttributes {
+    override def attributes:Map[String,String] =
+      if(attr.contains("label"))
+        attr
+      else
+        attr.get("kind").map(x=>attr + ("label" -> x)).getOrElse(attr)
     override def toDot:String = s"""${src.id}->${dst.id}${super.toDot}"""
   }
 
@@ -112,25 +118,34 @@ object GovApp {
 
     val graph = new Graph()
     graph.nodes.international.cedo(label="CEDO\nCurtea European a Drepturilor Omului")
-    graph.nodes.judiciar(label="judiciar (aplică și interpretează legile)")
-    graph.nodes.judiciar.ccr(label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani")
-    graph.nodes.judiciar.iccj(label="ÎCCJ\nÎnalta Curte de Casație și Justiție.")
+
+    graph.nodes.puteri.judiciar(label="judiciar (aplică și interpretează legile)")
+    graph.nodes.puteri.legislativ
+    graph.nodes.puteri.executiv
+    graph.nodes.puteri.presa
+    graph.nodes.puteri.cetateni
+    graph.edge.cetateni.asociatii.asociaza()
+
     graph.nodes.judiciar.judecatori
     graph.nodes.magistrati.judecatori
+    graph.nodes.judecatori.ccr(label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani")
+    graph.nodes.judecatori.iccj(label="ÎCCJ\nÎnalta Curte de Casație și Justiție.")
+
     graph.nodes.magistrati.procurori
-    graph.nodes.procurori.dna(label="DNA\nDirectia Nationala Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
+    graph.nodes.procurori.dna(label="DNA\nDepartamentul National Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
     graph.nodes.procurori.piccj(label="PICCJ\nPICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)")
+
+    graph.nodes.asociatii.partide
+    graph.nodes.asociatii.sindicate
+    graph.nodes.asociatii.patronate
+    graph.nodes.asociatii.asociatiiProfesionale(label="Asociatii Profesionale")
 
     graph.edge.csm.magistrati.propune()
     graph.edge.cedo.iccj.control(label="corectie decizii")
 
+    graph.edge.piccj.iccj.deserveste()
+
+    graph.nodes.by(label="by raisercostin & alexugoku (c) 2018")
     println(graph.toDot)
   }
 }
-//subgraph clusterJudiciar {
-//  label="judiciar (aplică și interpretează legile)"
-//  CEDO [label="CEDO\nCurtea European a Drepturilor Omului"]
-//  CCR [label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani"];
-//  ICCJ [label="ICCJ\nÎnalta Curte de Casație și Justiție."];
-//  CEDO->ICCJ [label="corectie decizii"]
-//}

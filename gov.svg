@@ -1,0 +1,245 @@
+<svg width="2206pt" height="498pt" viewBox="0.00 0.00 2206.00 498.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 494)">
+<title>G</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-494 2203,-494 2203,5 -4,5"></polygon>
+<!-- piccj -->
+<g id="node1" class="node"><title>piccj</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="1583" cy="-167" rx="268.439" ry="29.3315"></ellipse>
+<text text-anchor="middle" x="1583" y="-171.2" font-family="Times,serif" font-size="14.00">PICCJ</text>
+<text text-anchor="middle" x="1583" y="-154.4" font-family="Times,serif" font-size="14.00">PICCJ - Parchetul de pe langa Inalta Curte de Casatie si Justitie.)</text>
+</g>
+<!-- iccj -->
+<g id="node2" class="node"><title>iccj</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="1583" cy="-30" rx="143.234" ry="29.3315"></ellipse>
+<text text-anchor="middle" x="1583" y="-34.2" font-family="Times,serif" font-size="14.00">ICCJ</text>
+<text text-anchor="middle" x="1583" y="-17.4" font-family="Times,serif" font-size="14.00">Inalta Curte de Casatie si Justitie.</text>
+</g>
+<!-- piccj&#45;&gt;iccj -->
+<g id="edge42" class="edge"><title>piccj-&gt;iccj</title>
+<path fill="none" stroke="black" d="M1583,-137.37C1583,-117.682 1583,-91.3008 1583,-69.7371"></path>
+<polygon fill="black" stroke="black" points="1586.5,-69.5887 1583,-59.5888 1579.5,-69.5888 1586.5,-69.5887"></polygon>
+<text text-anchor="middle" x="1612.15" y="-82.8" font-family="Times,serif" font-size="14.00">deserveste</text>
+</g>
+<!-- judiciar -->
+<g id="node3" class="node"><title>judiciar</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="698" cy="-382" rx="157.138" ry="18"></ellipse>
+<text text-anchor="middle" x="698" y="-377.8" font-family="Times,serif" font-size="14.00">judiciar (aplica si interpreteaza legile)</text>
+</g>
+<!-- judecatori -->
+<g id="node12" class="node"><title>judecatori</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="849" cy="-292" rx="49.4713" ry="18"></ellipse>
+<text text-anchor="middle" x="849" y="-287.8" font-family="Times,serif" font-size="14.00">judecatori</text>
+</g>
+<!-- judiciar&#45;&gt;judecatori -->
+<g id="edge16" class="edge"><title>judiciar-&gt;judecatori</title>
+<path fill="none" stroke="black" d="M726.757,-364.241C751.864,-349.609 788.339,-328.352 814.909,-312.868"></path>
+<polygon fill="black" stroke="black" points="816.981,-315.711 823.859,-307.652 813.457,-309.663 816.981,-315.711"></polygon>
+<text text-anchor="middle" x="808.605" y="-332.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- csm -->
+<g id="node4" class="node"><title>csm</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="932" cy="-472" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="932" y="-467.8" font-family="Times,serif" font-size="14.00">csm</text>
+</g>
+<!-- magistrati -->
+<g id="node5" class="node"><title>magistrati</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="932" cy="-382" rx="49.4829" ry="18"></ellipse>
+<text text-anchor="middle" x="932" y="-377.8" font-family="Times,serif" font-size="14.00">magistrati</text>
+</g>
+<!-- csm&#45;&gt;magistrati -->
+<g id="edge38" class="edge"><title>csm-&gt;magistrati</title>
+<path fill="none" stroke="black" d="M932,-453.614C932,-441.24 932,-424.369 932,-410.22"></path>
+<polygon fill="black" stroke="black" points="935.5,-410.05 932,-400.05 928.5,-410.05 935.5,-410.05"></polygon>
+<text text-anchor="middle" x="954.938" y="-422.8" font-family="Times,serif" font-size="14.00">propune</text>
+</g>
+<!-- magistrati&#45;&gt;judecatori -->
+<g id="edge18" class="edge"><title>magistrati-&gt;judecatori</title>
+<path fill="none" stroke="black" d="M916.777,-364.859C904.103,-351.423 885.876,-332.098 871.516,-316.872"></path>
+<polygon fill="black" stroke="black" points="873.816,-314.209 864.408,-309.336 868.723,-319.012 873.816,-314.209"></polygon>
+<text text-anchor="middle" x="918.605" y="-332.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- procurori -->
+<g id="node21" class="node"><title>procurori</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="1107" cy="-292" rx="46.4481" ry="18"></ellipse>
+<text text-anchor="middle" x="1107" y="-287.8" font-family="Times,serif" font-size="14.00">procurori</text>
+</g>
+<!-- magistrati&#45;&gt;procurori -->
+<g id="edge24" class="edge"><title>magistrati-&gt;procurori</title>
+<path fill="none" stroke="black" d="M959.729,-367.056C989.641,-352.015 1037.4,-327.997 1070.39,-311.412"></path>
+<polygon fill="black" stroke="black" points="1072.33,-314.353 1079.69,-306.734 1069.18,-308.099 1072.33,-314.353"></polygon>
+<text text-anchor="middle" x="1056.61" y="-332.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- asociatiiProfesionale -->
+<g id="node6" class="node"><title>asociatiiProfesionale</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="189" cy="-167" rx="96.3708" ry="18"></ellipse>
+<text text-anchor="middle" x="189" y="-162.8" font-family="Times,serif" font-size="14.00">Asociatii Profesionale</text>
+</g>
+<!-- presa -->
+<g id="node7" class="node"><title>presa</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="157" cy="-382" rx="31.1141" ry="18"></ellipse>
+<text text-anchor="middle" x="157" y="-377.8" font-family="Times,serif" font-size="14.00">presa</text>
+</g>
+<!-- dna -->
+<g id="node8" class="node"><title>dna</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="1107" cy="-167" rx="189.583" ry="41.0911"></ellipse>
+<text text-anchor="middle" x="1107" y="-179.6" font-family="Times,serif" font-size="14.00">DNA</text>
+<text text-anchor="middle" x="1107" y="-162.8" font-family="Times,serif" font-size="14.00">Departamentul National Anticoruptie</text>
+<text text-anchor="middle" x="1107" y="-146" font-family="Times,serif" font-size="14.00">(fost PNA - Parchetul National Anticoruptie)</text>
+</g>
+<!-- executiv -->
+<g id="node9" class="node"><title>executiv</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="250" cy="-382" rx="43.6234" ry="18"></ellipse>
+<text text-anchor="middle" x="250" y="-377.8" font-family="Times,serif" font-size="14.00">executiv</text>
+</g>
+<!-- legislativ -->
+<g id="node10" class="node"><title>legislativ</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="358" cy="-382" rx="46.1616" ry="18"></ellipse>
+<text text-anchor="middle" x="358" y="-377.8" font-family="Times,serif" font-size="14.00">legislativ</text>
+</g>
+<!-- patronate -->
+<g id="node11" class="node"><title>patronate</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="351" cy="-167" rx="46.4467" ry="18"></ellipse>
+<text text-anchor="middle" x="351" y="-162.8" font-family="Times,serif" font-size="14.00">patronate</text>
+</g>
+<!-- judecatori&#45;&gt;iccj -->
+<g id="edge22" class="edge"><title>judecatori-&gt;iccj</title>
+<path fill="none" stroke="black" d="M848.131,-273.959C846.487,-234.062 844.847,-136.279 866.79,-114 905.829,-74.3623 1236.06,-49.7491 1434.21,-38.409"></path>
+<polygon fill="black" stroke="black" points="1434.64,-41.8905 1444.43,-37.8295 1434.24,-34.9017 1434.64,-41.8905"></polygon>
+<text text-anchor="middle" x="887.605" y="-162.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- ccr -->
+<g id="node15" class="node"><title>ccr</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="673" cy="-167" rx="148.263" ry="53.3494"></ellipse>
+<text text-anchor="middle" x="673" y="-188" font-family="Times,serif" font-size="14.00">CCR</text>
+<text text-anchor="middle" x="673" y="-171.2" font-family="Times,serif" font-size="14.00">Curtea Constitutionala a Romaniei</text>
+<text text-anchor="middle" x="673" y="-154.4" font-family="Times,serif" font-size="14.00">9 judecatori</text>
+<text text-anchor="middle" x="673" y="-137.6" font-family="Times,serif" font-size="14.00">9 ani</text>
+</g>
+<!-- judecatori&#45;&gt;ccr -->
+<g id="edge20" class="edge"><title>judecatori-&gt;ccr</title>
+<path fill="none" stroke="black" d="M827.065,-275.671C807.188,-261.779 776.714,-240.482 748.099,-220.484"></path>
+<polygon fill="black" stroke="black" points="749.894,-217.468 739.692,-214.609 745.884,-223.206 749.894,-217.468"></polygon>
+<text text-anchor="middle" x="817.605" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- international -->
+<g id="node13" class="node"><title>international</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="2034" cy="-292" rx="59.267" ry="18"></ellipse>
+<text text-anchor="middle" x="2034" y="-287.8" font-family="Times,serif" font-size="14.00">international</text>
+</g>
+<!-- cedo -->
+<g id="node16" class="node"><title>cedo</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="2034" cy="-167" rx="164.556" ry="29.3315"></ellipse>
+<text text-anchor="middle" x="2034" y="-171.2" font-family="Times,serif" font-size="14.00">CEDO</text>
+<text text-anchor="middle" x="2034" y="-154.4" font-family="Times,serif" font-size="14.00">Curtea European a Drepturilor Omului</text>
+</g>
+<!-- international&#45;&gt;cedo -->
+<g id="edge2" class="edge"><title>international-&gt;cedo</title>
+<path fill="none" stroke="black" d="M2034,-273.897C2034,-256.688 2034,-229.547 2034,-207.051"></path>
+<polygon fill="black" stroke="black" points="2037.5,-206.77 2034,-196.77 2030.5,-206.77 2037.5,-206.77"></polygon>
+<text text-anchor="middle" x="2054.61" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- asociatii -->
+<g id="node14" class="node"><title>asociatii</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="351" cy="-292" rx="43.3236" ry="18"></ellipse>
+<text text-anchor="middle" x="351" y="-287.8" font-family="Times,serif" font-size="14.00">asociatii</text>
+</g>
+<!-- asociatii&#45;&gt;asociatiiProfesionale -->
+<g id="edge36" class="edge"><title>asociatii-&gt;asociatiiProfesionale</title>
+<path fill="none" stroke="black" d="M331.136,-275.918C303.137,-254.659 251.839,-215.711 219.131,-190.877"></path>
+<polygon fill="black" stroke="black" points="220.918,-187.84 210.838,-184.58 216.686,-193.415 220.918,-187.84"></polygon>
+<text text-anchor="middle" x="324.605" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- asociatii&#45;&gt;patronate -->
+<g id="edge34" class="edge"><title>asociatii-&gt;patronate</title>
+<path fill="none" stroke="black" d="M351,-273.897C351,-253.633 351,-219.6 351,-195.593"></path>
+<polygon fill="black" stroke="black" points="354.5,-195.354 351,-185.354 347.5,-195.354 354.5,-195.354"></polygon>
+<text text-anchor="middle" x="371.605" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- sindicate -->
+<g id="node18" class="node"><title>sindicate</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="461" cy="-167" rx="45.0413" ry="18"></ellipse>
+<text text-anchor="middle" x="461" y="-162.8" font-family="Times,serif" font-size="14.00">sindicate</text>
+</g>
+<!-- asociatii&#45;&gt;sindicate -->
+<g id="edge32" class="edge"><title>asociatii-&gt;sindicate</title>
+<path fill="none" stroke="black" d="M372.608,-276.087C380.375,-270.251 388.951,-263.227 396,-256 414.92,-236.604 432.938,-211.498 445.184,-193.069"></path>
+<polygon fill="black" stroke="black" points="448.17,-194.899 450.711,-184.613 442.31,-191.069 448.17,-194.899"></polygon>
+<text text-anchor="middle" x="432.605" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- partide -->
+<g id="node20" class="node"><title>partide</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="37" cy="-167" rx="37.2758" ry="18"></ellipse>
+<text text-anchor="middle" x="37" y="-162.8" font-family="Times,serif" font-size="14.00">partide</text>
+</g>
+<!-- asociatii&#45;&gt;partide -->
+<g id="edge30" class="edge"><title>asociatii-&gt;partide</title>
+<path fill="none" stroke="black" d="M309.019,-287.457C253.602,-281.165 154.688,-264.225 83,-220 71.6198,-212.979 61.4644,-202.278 53.6094,-192.405"></path>
+<polygon fill="black" stroke="black" points="56.3917,-190.282 47.5758,-184.405 50.803,-194.497 56.3917,-190.282"></polygon>
+<text text-anchor="middle" x="179.605" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- cedo&#45;&gt;iccj -->
+<g id="edge40" class="edge"><title>cedo-&gt;iccj</title>
+<path fill="none" stroke="black" d="M1952.07,-141.474C1872.88,-117.77 1753.25,-81.962 1671.82,-57.5857"></path>
+<polygon fill="black" stroke="black" points="1672.66,-54.186 1662.08,-54.6713 1670.66,-60.892 1672.66,-54.186"></polygon>
+<text text-anchor="middle" x="1836.56" y="-82.8" font-family="Times,serif" font-size="14.00">corectie decizii</text>
+</g>
+<!-- cetateni -->
+<g id="node17" class="node"><title>cetateni</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="464" cy="-382" rx="41.0943" ry="18"></ellipse>
+<text text-anchor="middle" x="464" y="-377.8" font-family="Times,serif" font-size="14.00">cetateni</text>
+</g>
+<!-- cetateni&#45;&gt;asociatii -->
+<g id="edge14" class="edge"><title>cetateni-&gt;asociatii</title>
+<path fill="none" stroke="black" d="M444.831,-366.072C426.679,-351.936 399.221,-330.553 378.691,-314.565"></path>
+<polygon fill="black" stroke="black" points="380.683,-311.68 370.643,-308.297 376.382,-317.203 380.683,-311.68"></polygon>
+<text text-anchor="middle" x="441.704" y="-332.8" font-family="Times,serif" font-size="14.00">asociaza</text>
+</g>
+<!-- puteri -->
+<g id="node19" class="node"><title>puteri</title>
+<ellipse fill="#ccd1ff" stroke="#ccd1ff" cx="358" cy="-472" rx="33.343" ry="18"></ellipse>
+<text text-anchor="middle" x="358" y="-467.8" font-family="Times,serif" font-size="14.00">puteri</text>
+</g>
+<!-- puteri&#45;&gt;judiciar -->
+<g id="edge4" class="edge"><title>puteri-&gt;judiciar</title>
+<path fill="none" stroke="black" d="M387.282,-463.421C440.312,-449.696 553.613,-420.371 627.75,-401.182"></path>
+<polygon fill="black" stroke="black" points="628.686,-404.555 637.49,-398.661 626.932,-397.779 628.686,-404.555"></polygon>
+<text text-anchor="middle" x="579.605" y="-422.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- puteri&#45;&gt;presa -->
+<g id="edge10" class="edge"><title>puteri-&gt;presa</title>
+<path fill="none" stroke="black" d="M328.055,-463.575C305.274,-457.452 273.414,-447.86 246.79,-436 225.246,-426.403 202.374,-412.847 185.106,-401.847"></path>
+<polygon fill="black" stroke="black" points="186.921,-398.853 176.623,-396.362 183.12,-404.731 186.921,-398.853"></polygon>
+<text text-anchor="middle" x="267.605" y="-422.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- puteri&#45;&gt;executiv -->
+<g id="edge8" class="edge"><title>puteri-&gt;executiv</title>
+<path fill="none" stroke="black" d="M339.385,-456.871C331.169,-450.563 321.435,-442.99 312.79,-436 300.471,-426.04 287.025,-414.749 275.747,-405.154"></path>
+<polygon fill="black" stroke="black" points="277.844,-402.342 267.966,-398.512 273.299,-407.666 277.844,-402.342"></polygon>
+<text text-anchor="middle" x="333.605" y="-422.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- puteri&#45;&gt;legislativ -->
+<g id="edge6" class="edge"><title>puteri-&gt;legislativ</title>
+<path fill="none" stroke="black" d="M358,-453.614C358,-441.24 358,-424.369 358,-410.22"></path>
+<polygon fill="black" stroke="black" points="361.5,-410.05 358,-400.05 354.5,-410.05 361.5,-410.05"></polygon>
+<text text-anchor="middle" x="378.605" y="-422.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- puteri&#45;&gt;cetateni -->
+<g id="edge12" class="edge"><title>puteri-&gt;cetateni</title>
+<path fill="none" stroke="black" d="M376.57,-456.919C384.754,-450.62 394.438,-443.041 403,-436 415.033,-426.105 428.105,-414.822 439.05,-405.217"></path>
+<polygon fill="black" stroke="black" points="441.411,-407.801 446.598,-398.563 436.782,-402.55 441.411,-407.801"></polygon>
+<text text-anchor="middle" x="444.605" y="-422.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- procurori&#45;&gt;piccj -->
+<g id="edge28" class="edge"><title>procurori-&gt;piccj</title>
+<path fill="none" stroke="black" d="M1144.75,-281.246C1214.58,-263.2 1366.4,-223.97 1471.63,-196.779"></path>
+<polygon fill="black" stroke="black" points="1472.54,-200.159 1481.34,-194.269 1470.79,-193.382 1472.54,-200.159"></polygon>
+<text text-anchor="middle" x="1323.61" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+<!-- procurori&#45;&gt;dna -->
+<g id="edge26" class="edge"><title>procurori-&gt;dna</title>
+<path fill="none" stroke="black" d="M1107,-273.897C1107,-259.563 1107,-238.34 1107,-218.649"></path>
+<polygon fill="black" stroke="black" points="1110.5,-218.536 1107,-208.536 1103.5,-218.536 1110.5,-218.536"></polygon>
+<text text-anchor="middle" x="1127.61" y="-242.8" font-family="Times,serif" font-size="14.00">include</text>
+</g>
+</g>
+</svg>
