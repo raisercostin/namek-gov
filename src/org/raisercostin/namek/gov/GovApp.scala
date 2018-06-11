@@ -14,8 +14,8 @@ object GovApp {
 
   trait WithAttributes{self=>
     var attributes:Map[String,String] = Map()
-    def addAttribute(src:String,dest:String*):self.type ={
-      attributes += src -> dest.head
+    def addAttribute(src:String,dest:String):self.type ={
+      attributes += src -> dest
       self
     }
     def addAttributes(args: (String, Any)*):self.type = addAttributes2(args.toMap.mapValues(_.toString))
@@ -93,8 +93,15 @@ object GovApp {
     def selectDynamic(dest:String): EdgeBuilder3 = {val edge = graph.addEdge(src,dest);new EdgeBuilder3(graph,edge)}
   }
   class EdgeBuilder3(graph:Graph, edge:Edge) extends Dynamic {
-    def applyDynamic(name:String)(params:String*): EdgeBuilder3 = {edge.addAttribute(name,params:_*);this}
+    def applyDynamic(name:String)(value:String*): EdgeBuilder3 = {
+      if(name!="attributes")
+        edge.addAttribute("kind",name)
+      value.headOption.map{edge.addAttribute(name,_)}.getOrElse();
+      this
+    }
     def applyDynamicNamed(name:String)(args: (String, Any)*):EdgeBuilder3 = {
+      if(name!="attributes")
+        edge.addAttribute("kind",name)
       edge.addAttributes(args:_*)
       this
     }
@@ -107,8 +114,16 @@ object GovApp {
     graph.nodes.international.cedo(label="CEDO\nCurtea European a Drepturilor Omului")
     graph.nodes.judiciar(label="judiciar (aplică și interpretează legile)")
     graph.nodes.judiciar.ccr(label="CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani",mandat="9 ani")
-    graph.nodes.judiciar.iccj(label="ICCJ\nÎnalta Curte de Casație și Justiție.")
-    graph.edge.cedo.iccj.attributes(label="corectie decizii", kind="control")
+    graph.nodes.judiciar.iccj(label="ÎCCJ\nÎnalta Curte de Casație și Justiție.")
+    graph.nodes.judiciar.judecatori
+    graph.nodes.magistrati.judecatori
+    graph.nodes.magistrati.procurori
+    graph.nodes.procurori.dna(label="DNA\nDirectia Nationala Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
+    graph.nodes.procurori.piccj(label="PICCJ\nPICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)")
+
+    graph.edge.csm.magistrati.propune()
+    graph.edge.cedo.iccj.control(label="corectie decizii")
+
     println(graph.toDot)
   }
 }
