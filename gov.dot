@@ -59,23 +59,4 @@ digraph G {
   "patronatele"
   "asociatiile profesionale"
   "cetatenii"
-  
-
-    subgraph clusterFord {
-        label="Ford"
-        Ford[shape="none"][style="invis"][label=""];
-        Mustang
-        Thunderbird
-    }
-    subgraph clusterChevrolet {
-        label="Chevrolet"
-        shape="circle"
-        Chevrolet[shape="none"][style="invis"][label=""];
-        Camero
-    }
-    Ford -> Make [label="public"][ltail ="clusterFord"];
-    Chevrolet -> Make [label="public"][ltail ="clusterChevrolet"];
-    Mustang -> Vehicle [label="private"];
-    Thunderbird -> Vehicle [label="private"];
-    Camero -> Vehicle [label="private"];
 }

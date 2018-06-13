@@ -21,8 +21,8 @@
       <file leaf-file-name="GovApp.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/raisercostin/namek/gov/GovApp.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="202" column="52" lean-forward="true" selection-start-line="202" selection-start-column="52" selection-end-line="202" selection-end-column="52" />
+            <state relative-caret-position="472">
+              <caret line="168" column="51" lean-forward="false" selection-start-line="168" selection-start-column="51" selection-end-line="168" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -42,7 +42,29 @@
       <find>type</find>
       <find>&quot;</find>
       <find>.presedinte</find>
+      <find>CCR</find>
+      <find>deputa</find>
+      <find>monitorul</find>
+      <find>international</find>
+      <find>eu</find>
+      <find>nato</find>
+      <find>administra</find>
+      <find>presedinte</find>
+      <find>CCJ</find>
+      <find>ij</find>
+      <find>csmCSM</find>
+      <find>iccj</find>
+      <find>csm</find>
+      <find>CCRCC</find>
+      <find>ccr</find>
+      <find>piccj</find>
+      <find>cedo</find>
+      <find>amr</find>
     </findStrings>
+    <replaceStrings>
+      <replace>ICCJ</replace>
+      <replace>CSAT</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -359,8 +381,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/raisercostin/namek/gov/GovApp.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="202" column="52" lean-forward="true" selection-start-line="202" selection-start-column="52" selection-end-line="202" selection-end-column="52" />
+        <state relative-caret-position="472">
+          <caret line="168" column="51" lean-forward="false" selection-start-line="168" selection-start-column="51" selection-end-line="168" selection-end-column="51" />
           <folding />
         </state>
       </provider>

@@ -140,9 +140,28 @@ object GovApp {
 
   def main(args: Array[String]): Unit = {
     println("//view at http://www.webgraphviz.com/")
-    println("//various engine and formats at https://dreampuf.github.io/GraphvizOnline/")
+    println("//various engine(dot) and formats(png-image-element) to save as png at https://dreampuf.github.io/GraphvizOnline/")
     val graph = new Graph()
-    graph.nodes.international.cedo(label = "CEDO\nCurtea European a Drepturilor Omului")
+    //Comisia Europeană e al puterii executive. Pe lângă astea, Consiliul Uniunii Europene are rol de o a doua cameră legislativă și Consiliul European are în principal roluri executive, cred. Mai mult, nu prea se ocupă niciuna strict cu un singur tip de putere.
+
+    graph.nodes.international.CEDO(label = "CEDO\nCurtea European a Drepturilor Omului")
+    graph.nodes.international.UE(label="UE\nUniunea Europeana")
+    graph.nodes.international.NATO(label="NATO\nNorth Atlantic Treaty Organization")
+    graph.nodes.international.ONU(label="ONU\nOrganizatia Natiunilor Unite")
+    graph.nodes.international.CJUE(label="CJUE \n Curtea de Justiție a Uniunii Europene")
+    graph.nodes.international.europe(URL="https://europa.eu/european-union/about-eu/institutions-bodies_en")
+    graph.nodes.international.europe.comisiaEuropeana(label="CE\nComisia Europeana \n propune si implementeaza legislatia, monitorizeaza tratate si functionarea zilnica a UE")
+    graph.nodes.international.europe.consiliulEuropean(label="Consiliul European \n directia strategica care decide directia politica generala a UE. Sefii de state si de guverne ai statelor UE")
+    graph.nodes.international.europe.consiliulUniuniiEuropene(label="Consiliul Uniunii Europene \n ministrii din guverne, care impart puterea bugetara si legislativa cu Parlamentul European")
+    graph.nodes.international.europe.parlamentulEuropean(label="EP\nParlamentul European \n propune si implementeaza legislatia",description="Unicul organ EU ales. Reprezinta cei 500 de milioane de ctateni europeni.")
+    graph.nodes.international.europe.presedinteleComisieiEuropene(label="EP\nParlamentul European \n propune si implementeaza legislatia")
+
+    graph.edge.parlamentulEuropean.presedinteleComisieiEuropene.alege()
+    graph.edge.legislativ.parlamentulEuropean
+    graph.edge.legislativ.consiliulUniuniiEuropene
+    graph.edge.judiciar.CJUE
+    graph.edge.executiv.comisiaEuropeana
+    graph.edge.executiv.consiliulEuropean
 
     graph.nodes.puteri.legislativ
     graph.nodes.puteri.legislativ.parlament
@@ -181,6 +200,7 @@ object GovApp {
 
     graph.nodes.puteri.executiv(tooltip="(guvernează - implementarea legilor în practică și cu administrarea birocrației de stat)")
     graph.nodes.puteri.executiv.presedinte(URL="http://www.contributors.ro/dezbatere/despre-o-inertie-politica-si-constitutionala-presedintele-romaniei-parte-a-puterii-executive/")
+    graph.nodes.puteri.executiv.agentiiInformatii
     graph.nodes.puteri.executiv.guvern(tooltip="Guvernul însă poate propune legi spre aprobare de către legislativ.")
     graph.nodes.puteri.executiv.guvern.ministri
     graph.nodes.puteri.executiv.guvern.ministri.primMinistru
@@ -211,7 +231,7 @@ object GovApp {
     graph.edge.ministrulFinantelorPublice.mfp.conduce()
 
 
-    graph.nodes.csat(label = "CSAT\nConsiliul Suprem de Apărare a Ţării",
+    graph.nodes.CSAT(label = "CSAT\nConsiliul Suprem de Apărare a Ţării",
       tooltip =
         """Preşedintele României îndeplineşte funcţia de preşedinte al Consiliului Suprem de Apărare a Ţării.
           |Primul-ministru al Guvernului României îndeplineşte funcţia de vicepreşedinte al Consiliului Suprem de Apărare a Ţării.
@@ -219,23 +239,24 @@ object GovApp {
           |Secretarul Consiliului Suprem de Apărare a Ţării este numit de Preşedintele României şi are rang de consilier de stat în cadrul Administraţiei Prezidenţiale.
           |(Articolul 5 din Legea privind organizarea şi funcţionarea Consiliului Suprem de Apărare a Ţării)""".stripMargin)
 
-    graph.edge.csat.presedinte.presedinte()
-    graph.edge.csat.primMinistru.vicepresedinte()
-    graph.edge.csat.ministrulAparariiNationale.membru()
-    graph.edge.csat.ministrulAfacerilorInterne.membru()
-    graph.edge.csat.ministrulAfacerilorExterne.membru()
-    graph.edge.csat.ministrulJustitiei.membru()
-    graph.edge.csat.ministrulEconomiei.membru()
-    graph.edge.csat.ministrulFinantelorPublice.membru()
-    graph.edge.csat.directorulSIE.membru()
-    graph.edge.csat.directorulSRI.membru()
-    graph.edge.csat.sefStatMajorAparare.membru()
-    graph.edge.csat.consilierPrezidentialSecuritateNationala.membru()
+    graph.edge.CSAT.presedinte.presedinte()
+    graph.edge.CSAT.primMinistru.vicepresedinte()
+    graph.edge.CSAT.ministrulAparariiNationale.membru()
+    graph.edge.CSAT.ministrulAfacerilorInterne.membru()
+    graph.edge.CSAT.ministrulAfacerilorExterne.membru()
+    graph.edge.CSAT.ministrulJustitiei.membru()
+    graph.edge.CSAT.ministrulEconomiei.membru()
+    graph.edge.CSAT.ministrulFinantelorPublice.membru()
+    graph.edge.CSAT.directorulSIE.membru()
+    graph.edge.CSAT.directorulSRI.membru()
+    graph.edge.CSAT.sefStatMajorAparare.membru()
+    graph.edge.CSAT.consilierPrezidentialSecuritateNationala.membru()
 
     graph.nodes.agentiiInformatii(en="intelligence services",label="agenţiile de informații")
     graph.nodes.agentiiInformatii.SRI
     graph.nodes.agentiiInformatii.SIE
     graph.nodes.agentiiInformatii.STS
+    graph.nodes.agentiiInformatii.SPP
     graph.nodes.agentiiInformatii.DGIA
 
     graph.nodes.SRI(label="SRI\nServiciului Român de Informaţii")
@@ -243,14 +264,12 @@ object GovApp {
     graph.nodes.STS(label="STS\nServiciul de Telecomunicații Speciale")
     graph.nodes.SPP(label="SPP\nServiciul de Protecţie şi Pază")
     graph.nodes.ministrulAparariiNationale.DGIA(label="DGIA\nDirecția Generală de Informații a Apărării",URL="https://en.wikipedia.org/wiki/General_Directorate_for_Defense_Intelligence")
+    graph.nodes.ministrulAparariiNationale.SMA(label="Statului Major al Apărării")
     graph.nodes.DGIA.DIM(label="DIM\nDirecția Informații Militare",abelEn="Directorate for Military Intelligence - foreign intelligence")
     graph.nodes.DGIA.DSM(label="DSM\nDirecţia Siguranță Militară",labelEn="Directorate for Military Security - counter-intelligence")
     graph.nodes.MonitorulOficial
     graph.nodes.AdministratiaPrezidentiala
-    graph.nodes.NATO
-    graph.nodes.UE
 
-    graph.nodes.SMA(label="Statului Major al Apărării")
     graph.nodes.consilierPrezidentialSecuritateNationala(label="consilierul prezidențial pentru securitate naţională")
 
 
@@ -261,27 +280,50 @@ object GovApp {
     graph.nodes.puteri.judiciar(label = "judiciar (aplică și interpretează legile)")
     graph.nodes.judiciar.judecatori
     graph.nodes.magistrati.judecatori
-    graph.nodes.judecatori.ccr(label = "CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani", mandat = "9 ani")
-    graph.nodes.judecatori.iccj(label = "ÎCCJ\nÎnalta Curte de Casație și Justiție.")
+    graph.nodes.judecatori.CCR(label = "CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani", mandat = "9 ani")
+    graph.nodes.judecatori.ICCJ(label = "ÎCCJ\nÎnalta Curte de Casație și Justiție.")
+    graph.nodes.judecatori.IJ(label="IJ \n Inspectia Judiciara")
+    graph.nodes.judecatori.CSM(label="CSM \n Consiliul Superior al Magistraturii")
+
+    graph.edge.ICCJ.SRI.protocol(URL="http://www.ziare.com/stiri/csm/consiliul-superior-al-magistraturii-inspectia-judiciara-si-ICCJ-au-incheiat-protocoale-de-cooperare-cu-sri-1508549")
+    graph.edge.IJ.SRI.protocol()
+    graph.edge.PICCJ.SRI.protocol()
+    graph.edge.CSM.SRI.protocol()
+
+    graph.edge.deputati.CCR.numeste(label="numeste\n3 judecatori")
+    graph.edge.senatori.CCR.numeste(label="numeste\n3 judecatori")
+    graph.edge.presedinte.CCR.numeste(label="numeste\n3 judecatori")
+
+    graph.edge.presedinte.AdministratiaPrezidentiala.conduce()
+    graph.edge.presedinte.CSAT.conduce()
+    graph.edge.presedinte.primMinistru.desemneaza()
+    graph.edge.presedinte.guvern.numeste()
+    graph.edge.presedinte.parlament.dizolva()
+    graph.edge.presedinte.referendum.initiere()
 
     graph.nodes.magistrati.procurori
-    graph.nodes.procurori.dna(label = "DNA\nDepartamentul National Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
-    graph.nodes.procurori.piccj(label = "PICCJ\nPICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)")
+    graph.nodes.procurori.DNA(label = "DNA\nDepartamentul National Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
+    graph.nodes.procurori.PICCJ(label = "PICCJ\nPICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)")
 
-    graph.nodes.asociatii.partide
+    graph.nodes.asociatii.partide(label="partide politice")
     graph.nodes.asociatii.sindicate
     graph.nodes.asociatii.patronate
     graph.nodes.asociatii.asociatiiProfesionale(label = "Asociatii Profesionale")
-    graph.nodes.asociatii.ong(label="ONG\nOrganizatii Neguvernamentale")
+    graph.nodes.asociatii.asociatiiProfesionale.unjr(label="UNJR \n Uniunea Nationala a Judecatorilor din Romania")
+    graph.nodes.asociatii.asociatiiProfesionale.amr(label="AMR \n Asociatia Magistratilor din Romania")
+    graph.nodes.asociatii.ong(label="ONG \n Organizatii Neguvernamentale")
 
-    graph.edge.csm.magistrati.propune()
-    graph.edge.cedo.iccj.control(label = "corectie decizii")
+    graph.edge.magistrati.amr.asociati()
+    graph.edge.judecatori.unjr.asociati()
+    graph.edge.CSM.magistrati.propune()
+    graph.edge.CEDO.ICCJ.control(label = "corectie decizii")
 
-    graph.edge.piccj.iccj.deserveste()
+    graph.edge.PICCJ.ICCJ.deserveste()
 
 
     graph.edge.constitutie.legi.controleaza()
     graph.edge.legi.regulamente.controleaza()
+    graph.edge.legi.MonitorulOficial.publica()
 
     graph.nodes.by(label = "by raisercostin & alexugoku (c) 2018")
     println(graph.toDot)
