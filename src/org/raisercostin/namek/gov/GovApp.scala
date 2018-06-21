@@ -32,10 +32,42 @@ object GovApp {
 
     //see https://en.wikipedia.org/wiki/DOT_(graph_description_language)
     def toDot: String = if (attributes.isEmpty) "" else s""" [${attributes.map(x => escape(x._1) + "=" + escape(x._2)).mkString(",")}]"""
+
+    def toCypher: String = if (attributes.isEmpty) "" else s""" {${attributes.map(x => escape(x._1) + "=" + escape(x._2)).mkString(",")}}"""
+
+    def toGraphml: String = ""
+
+    def escapeGraphml(text: String): String = escape2(text, new StringBuilder).toString
+
+    val pairs = Map(
+      "lt" -> '<',
+      "gt" -> '>',
+      "amp" -> '&',
+      "quot" -> '"',
+      "apos" -> '\''
+    )
+    val escMap = (pairs - "apos") map { case (s, c) => c -> ("&%s;" format s) }
+
+    final def escape2(text: String, s: StringBuilder): StringBuilder = {
+      // Implemented per XML spec:
+      // http://www.w3.org/International/questions/qa-controls
+      text.iterator.foldLeft(s) { (s, c) =>
+        escMap.get(c) match {
+          case Some(str) => s ++= str
+          case _ if c >= ' ' || "\n\r\t".contains(c) => s += c
+          case _ => s // noop
+        }
+      }
+    }
   }
 
   case class Node(id: String) extends WithAttributes {
     override def toDot: String = s"$id${super.toDot}"
+
+    override def toCypher: String = s"CREATE ($id:Actor ${super.toCypher})"
+
+    override def toGraphml: String = //s"""<node id="$id"/>"""
+      s"""<node id="$id"><data key="d0"><y:ShapeNode><y:NodeLabel>${escapeGraphml(attr.getOrElse("label", id))}</y:NodeLabel></y:ShapeNode></data></node>"""
   }
 
   case class Edge(src: Node, dst: Node) extends WithAttributes {
@@ -46,6 +78,10 @@ object GovApp {
         attr.get("kind").map(x => attr + ("label" -> x)).getOrElse(attr)
 
     override def toDot: String = s"""${src.id}->${dst.id}${super.toDot}"""
+
+    override def toCypher: String = s"""CREATE (${src.id})-[:${attr.get("kind").getOrElse("")}${super.toCypher}]->(${dst.id})"""
+
+    override def toGraphml: String = s"""<edge source="${src.id}" target="${dst.id}"/>"""
   }
 
   import scala.language.dynamics
@@ -66,7 +102,7 @@ object GovApp {
 
     def findOrCreateNodeWithParent(nodeId: String, parent: Node): Node = {
       val node = findOrCreateNode(nodeId)
-      addEdge(parent.id, nodeId).addAttribute("label", "include").addAttribute("kind", "include")
+      addEdge(parent.id, nodeId).addAttribute("label", "include").addAttribute("weight", "2").addAttribute("kind", "include")
       node
     }
 
@@ -88,8 +124,50 @@ object GovApp {
          |  ${e.map(_.toDot).mkString("\n  ")}
          |}
       """.stripMargin
+
+    def toCypher =
+      s"""
+         |CREATE CONSTRAINT ON (actor:Actor) ASSERT actor.title IS UNIQUE;
+         |${n.map(_.toCypher).mkString("\n  ")}
+         |${e.map(_.toCypher).mkString("\n  ")}
+         |MATCH (n:Actor) OPTIONAL MATCH (n:Actor)-[r:include]->(sub) RETURN DISTINCT n,r,sub;
+      """.stripMargin
+
+    //    <graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+    //             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    //             xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+    //     http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    def toGraphml: String =
+      s"""<?xml version="1.0" encoding="UTF-8"?>
+         |<graphml
+         | xmlns="http://graphml.graphdrawing.org/xmlns"
+         | xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         | xmlns:y="http://www.yworks.com/xml/graphml"
+         | xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
+         |  <key for="node" id="d0" yfiles.type="nodegraphics"/>
+         |  <graph id="G" edgedefault="undirected">
+         |    ${n.map(_.toGraphml).mkString("\n    ")}
+         |    ${e.map(_.toGraphml).mkString("\n    ")}
+         |  </graph>
+         |</graphml>
+         |""".stripMargin
   }
 
+  /*
+<graphml
+ xmlns="http://graphml.graphdrawing.org/xmlns"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:y="http://www.yworks.com/xml/graphml"
+ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
+
+  <key for="node" id="d0" yfiles.type="nodegraphics"/>
+
+  <graph id="G" edgedefault="directed">
+    <node id="a"><data key="d0"><y:ShapeNode><y:NodeLabel>a</y:NodeLabel></y:ShapeNode></data></node>
+
+  </graph>
+</graphml>
+    */
   class NodeBuilder(graph: Graph) extends Dynamic {
     def selectDynamic(name: String): NodeBuilder2 = new NodeBuilder2(graph, graph.findOrCreateNode(name))
 
@@ -116,7 +194,8 @@ object GovApp {
 
   class EdgeBuilder2(graph: Graph, src: String) extends Dynamic {
     def selectDynamic(dest: String): EdgeBuilder3 = {
-      val edge = graph.addEdge(src, dest); new EdgeBuilder3(graph, edge)
+      val edge = graph.addEdge(src, dest);
+      new EdgeBuilder3(graph, edge)
     }
   }
 
@@ -145,16 +224,16 @@ object GovApp {
     //Comisia Europeană e al puterii executive. Pe lângă astea, Consiliul Uniunii Europene are rol de o a doua cameră legislativă și Consiliul European are în principal roluri executive, cred. Mai mult, nu prea se ocupă niciuna strict cu un singur tip de putere.
 
     graph.nodes.international.CEDO(label = "CEDO\nCurtea European a Drepturilor Omului")
-    graph.nodes.international.UE(label="UE\nUniunea Europeana")
-    graph.nodes.international.NATO(label="NATO\nNorth Atlantic Treaty Organization")
-    graph.nodes.international.ONU(label="ONU\nOrganizatia Natiunilor Unite")
-    graph.nodes.international.CJUE(label="CJUE \n Curtea de Justiție a Uniunii Europene")
-    graph.nodes.international.europe(URL="https://europa.eu/european-union/about-eu/institutions-bodies_en")
-    graph.nodes.international.europe.comisiaEuropeana(label="CE\nComisia Europeana \n propune si implementeaza legislatia, monitorizeaza tratate si functionarea zilnica a UE")
-    graph.nodes.international.europe.consiliulEuropean(label="Consiliul European \n directia strategica care decide directia politica generala a UE. Sefii de state si de guverne ai statelor UE")
-    graph.nodes.international.europe.consiliulUniuniiEuropene(label="Consiliul Uniunii Europene \n ministrii din guverne, care impart puterea bugetara si legislativa cu Parlamentul European")
-    graph.nodes.international.europe.parlamentulEuropean(label="EP\nParlamentul European \n propune si implementeaza legislatia",description="Unicul organ EU ales. Reprezinta cei 500 de milioane de ctateni europeni.")
-    graph.nodes.international.europe.presedinteleComisieiEuropene(label="EP\nParlamentul European \n propune si implementeaza legislatia")
+    graph.nodes.international.UE(label = "UE\nUniunea Europeana")
+    graph.nodes.international.NATO(label = "NATO\nNorth Atlantic Treaty Organization")
+    graph.nodes.international.ONU(label = "ONU\nOrganizatia Natiunilor Unite")
+    graph.nodes.international.CJUE(label = "CJUE \n Curtea de Justiție a Uniunii Europene")
+    graph.nodes.international.europe(URL = "https://europa.eu/european-union/about-eu/institutions-bodies_en")
+    graph.nodes.international.europe.comisiaEuropeana(label = "CE\nComisia Europeana \n propune si implementeaza legislatia, monitorizeaza tratate si functionarea zilnica a UE")
+    graph.nodes.international.europe.consiliulEuropean(label = "Consiliul European \n directia strategica care decide directia politica generala a UE. Sefii de state si de guverne ai statelor UE")
+    graph.nodes.international.europe.consiliulUniuniiEuropene(label = "Consiliul Uniunii Europene \n ministrii din guverne, care impart puterea bugetara si legislativa cu Parlamentul European")
+    graph.nodes.international.europe.parlamentulEuropean(label = "EP\nParlamentul European \n propune si implementeaza legislatia", description = "Unicul organ EU ales. Reprezinta cei 500 de milioane de ctateni europeni.")
+    graph.nodes.international.europe.presedinteleComisieiEuropene(label = "EP\nParlamentul European \n propune si implementeaza legislatia")
 
     graph.edge.parlamentulEuropean.presedinteleComisieiEuropene.alege()
     graph.edge.legislativ.parlamentulEuropean
@@ -198,10 +277,10 @@ object GovApp {
         |s) regimul general al cultelor;
         |t) celelalte domenii pentru care în Constituţie se prevede adoptarea de legi organice.""".stripMargin)
 
-    graph.nodes.puteri.executiv(tooltip="(guvernează - implementarea legilor în practică și cu administrarea birocrației de stat)")
-    graph.nodes.puteri.executiv.presedinte(URL="http://www.contributors.ro/dezbatere/despre-o-inertie-politica-si-constitutionala-presedintele-romaniei-parte-a-puterii-executive/")
+    graph.nodes.puteri.executiv(tooltip = "(guvernează - implementarea legilor în practică și cu administrarea birocrației de stat)")
+    graph.nodes.puteri.executiv.presedinte(URL = "http://www.contributors.ro/dezbatere/despre-o-inertie-politica-si-constitutionala-presedintele-romaniei-parte-a-puterii-executive/")
     graph.nodes.puteri.executiv.agentiiInformatii
-    graph.nodes.puteri.executiv.guvern(tooltip="Guvernul însă poate propune legi spre aprobare de către legislativ.")
+    graph.nodes.puteri.executiv.guvern(tooltip = "Guvernul însă poate propune legi spre aprobare de către legislativ.")
     graph.nodes.puteri.executiv.guvern.ministri
     graph.nodes.puteri.executiv.guvern.ministri.primMinistru
     graph.nodes.puteri.executiv.guvern.ministri.ministrulAparariiNationale
@@ -252,25 +331,25 @@ object GovApp {
     graph.edge.CSAT.sefStatMajorAparare.membru()
     graph.edge.CSAT.consilierPrezidentialSecuritateNationala.membru()
 
-    graph.nodes.agentiiInformatii(en="intelligence services",label="agenţiile de informații")
+    graph.nodes.agentiiInformatii(en = "intelligence services", label = "agenţiile de informații")
     graph.nodes.agentiiInformatii.SRI
     graph.nodes.agentiiInformatii.SIE
     graph.nodes.agentiiInformatii.STS
     graph.nodes.agentiiInformatii.SPP
     graph.nodes.agentiiInformatii.DGIA
 
-    graph.nodes.SRI(label="SRI\nServiciului Român de Informaţii")
-    graph.nodes.SIE(label="SIE\nServiciului de Informaţii Externe")
-    graph.nodes.STS(label="STS\nServiciul de Telecomunicații Speciale")
-    graph.nodes.SPP(label="SPP\nServiciul de Protecţie şi Pază")
-    graph.nodes.ministrulAparariiNationale.DGIA(label="DGIA\nDirecția Generală de Informații a Apărării",URL="https://en.wikipedia.org/wiki/General_Directorate_for_Defense_Intelligence")
-    graph.nodes.ministrulAparariiNationale.SMA(label="Statului Major al Apărării")
-    graph.nodes.DGIA.DIM(label="DIM\nDirecția Informații Militare",abelEn="Directorate for Military Intelligence - foreign intelligence")
-    graph.nodes.DGIA.DSM(label="DSM\nDirecţia Siguranță Militară",labelEn="Directorate for Military Security - counter-intelligence")
+    graph.nodes.SRI(label = "SRI\nServiciului Român de Informaţii")
+    graph.nodes.SIE(label = "SIE\nServiciului de Informaţii Externe")
+    graph.nodes.STS(label = "STS\nServiciul de Telecomunicații Speciale")
+    graph.nodes.SPP(label = "SPP\nServiciul de Protecţie şi Pază")
+    graph.nodes.ministrulAparariiNationale.DGIA(label = "DGIA\nDirecția Generală de Informații a Apărării", URL = "https://en.wikipedia.org/wiki/General_Directorate_for_Defense_Intelligence")
+    graph.nodes.ministrulAparariiNationale.SMA(label = "Statului Major al Apărării")
+    graph.nodes.DGIA.DIM(label = "DIM\nDirecția Informații Militare", abelEn = "Directorate for Military Intelligence - foreign intelligence")
+    graph.nodes.DGIA.DSM(label = "DSM\nDirecţia Siguranță Militară", labelEn = "Directorate for Military Security - counter-intelligence")
     graph.nodes.MonitorulOficial
     graph.nodes.AdministratiaPrezidentiala
 
-    graph.nodes.consilierPrezidentialSecuritateNationala(label="consilierul prezidențial pentru securitate naţională")
+    graph.nodes.consilierPrezidentialSecuritateNationala(label = "consilierul prezidențial pentru securitate naţională")
 
 
     graph.nodes.puteri.presa
@@ -281,18 +360,44 @@ object GovApp {
     graph.nodes.judiciar.judecatori
     graph.nodes.magistrati.judecatori
     graph.nodes.judecatori.CCR(label = "CCR\nCurtea Constitutionala a Romaniei\n9 judecatori\n9 ani", mandat = "9 ani")
-    graph.nodes.judecatori.ICCJ(label = "ÎCCJ\nÎnalta Curte de Casație și Justiție.")
-    graph.nodes.judecatori.IJ(label="IJ \n Inspectia Judiciara")
-    graph.nodes.judecatori.CSM(label="CSM \n Consiliul Superior al Magistraturii")
+    graph.nodes.judecatori.ICCJ(label = "ÎCCJ\nÎnalta Curte de Casație și Justiție \n (pana in 2003 - CSJ - Curtea Supremă de Justiție)", tooltip = "Instanța judiciară supremă în ierarhia instanțelor judecătorești din România")
+    graph.nodes.judecatori.IJ(label = "IJ \n Inspectia Judiciara")
+    graph.nodes.judecatori.CSM(label = "CSM \n Consiliul Superior al Magistraturii")
+    graph.nodes.instanteJudecatoresti(label = "Instanţe judecătoreşti")
+    graph.nodes.instanteJudecatoresti.ICCJ
+    graph.nodes.instanteJudecatoresti.curtiApel(label = "Curti Apel (15)")
+    graph.nodes.instanteJudecatoresti.tribunale(label = "Tribunale (42 - pe judete)")
+    graph.nodes.instanteJudecatoresti.tribunaleSpecializate
+    graph.nodes.instanteJudecatoresti.instanteMilitare
+    graph.nodes.instanteJudecatoresti.judecatorii(label = "Judecatorii (188 - 11 nu functioneaza)")
+    graph.nodes.curtiApel.tribunale
+    graph.nodes.curtiApel.tribunaleSpecializate
+    //Tribunalul Militar Teritorial Bucureşti şi Curtea Militară de Apel Bucureşti, Tribunalele militare funcţionează în municipiile Bucureşti, Cluj-Napoca şi Timişoara, iar Tribunalul Militar Teritorial şi Curtea Militară de Apel, în municipiul Bucureşti.
+    graph.nodes.parchet.parchetCurtiApel
+    graph.nodes.parchet.parchetTribunale
+    graph.nodes.parchet.parchetJudecatorii
+    graph.nodes.parchet.parchetMilitar
+    graph.edge.parchetCurtiApel.curtiApel.deserveste()
+    graph.edge.parchetTribunale.tribunale.deserveste()
+    graph.edge.parchetJudecatorii.judecatorii.deserveste()
+    graph.edge.parchetMilitar.instanteMilitare.deserveste()
 
-    graph.edge.ICCJ.SRI.protocol(URL="http://www.ziare.com/stiri/csm/consiliul-superior-al-magistraturii-inspectia-judiciara-si-ICCJ-au-incheiat-protocoale-de-cooperare-cu-sri-1508549")
+    //others
+    graph.nodes.avocatulPoporului
+    graph.nodes.primari
+    graph.nodes.prefecti
+    graph.nodes.consilulJudetean
+    graph.nodes.ANI
+    graph.nodes.DIICOT(label = "DIICOT \n Direcția de Investigare a Infracțiunilor de Criminalitate Organizată și Terorism")
+
+    graph.edge.ICCJ.SRI.protocol(URL = "http://www.ziare.com/stiri/csm/consiliul-superior-al-magistraturii-inspectia-judiciara-si-ICCJ-au-incheiat-protocoale-de-cooperare-cu-sri-1508549")
     graph.edge.IJ.SRI.protocol()
     graph.edge.PICCJ.SRI.protocol()
     graph.edge.CSM.SRI.protocol()
 
-    graph.edge.deputati.CCR.numeste(label="numeste\n3 judecatori")
-    graph.edge.senatori.CCR.numeste(label="numeste\n3 judecatori")
-    graph.edge.presedinte.CCR.numeste(label="numeste\n3 judecatori")
+    graph.edge.deputati.CCR.numeste(label = "numeste\n3 judecatori")
+    graph.edge.senatori.CCR.numeste(label = "numeste\n3 judecatori")
+    graph.edge.presedinte.CCR.numeste(label = "numeste\n3 judecatori")
 
     graph.edge.presedinte.AdministratiaPrezidentiala.conduce()
     graph.edge.presedinte.CSAT.conduce()
@@ -302,16 +407,19 @@ object GovApp {
     graph.edge.presedinte.referendum.initiere()
 
     graph.nodes.magistrati.procurori
-    graph.nodes.procurori.DNA(label = "DNA\nDepartamentul National Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
-    graph.nodes.procurori.PICCJ(label = "PICCJ\nPICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)")
+    graph.nodes.parchet.DNA(label = "DNA\nDepartamentul National Anticoruptie\n(fost PNA - Parchetul National Anticoruptie)")
+    graph.nodes.parchet.PICCJ(label = "PICCJ\nPICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)")
+    graph.nodes.DNA.PSDNA(label = "Procurorul şef al DNA")
+    graph.nodes.DNA.PG(label = "Procurorul General")
+    graph.nodes.PICCJ.DNA
 
-    graph.nodes.asociatii.partide(label="partide politice")
+    graph.nodes.asociatii.partide(label = "partide politice")
     graph.nodes.asociatii.sindicate
     graph.nodes.asociatii.patronate
     graph.nodes.asociatii.asociatiiProfesionale(label = "Asociatii Profesionale")
-    graph.nodes.asociatii.asociatiiProfesionale.unjr(label="UNJR \n Uniunea Nationala a Judecatorilor din Romania")
-    graph.nodes.asociatii.asociatiiProfesionale.amr(label="AMR \n Asociatia Magistratilor din Romania")
-    graph.nodes.asociatii.ong(label="ONG \n Organizatii Neguvernamentale")
+    graph.nodes.asociatii.asociatiiProfesionale.unjr(label = "UNJR \n Uniunea Nationala a Judecatorilor din Romania")
+    graph.nodes.asociatii.asociatiiProfesionale.amr(label = "AMR \n Asociatia Magistratilor din Romania")
+    graph.nodes.asociatii.ong(label = "ONG \n Organizatii Neguvernamentale")
 
     graph.edge.magistrati.amr.asociati()
     graph.edge.judecatori.unjr.asociati()
@@ -326,6 +434,8 @@ object GovApp {
     graph.edge.legi.MonitorulOficial.publica()
 
     graph.nodes.by(label = "by raisercostin & alexugoku (c) 2018")
-    println(graph.toDot)
+    //println(graph.toDot)
+    //println(graph.toCypher)
+    println(graph.toGraphml)
   }
 }

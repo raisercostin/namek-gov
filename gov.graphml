@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml
+ xmlns="http://graphml.graphdrawing.org/xmlns"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:y="http://www.yworks.com/xml/graphml"
+ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
+  <key for="node" id="d0" yfiles.type="nodegraphics"/>
+  <graph id="G" edgedefault="undirected">
+    <node id="NATO"><data key="d0"><y:ShapeNode><y:NodeLabel>NATO
+North Atlantic Treaty Organization</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="by"><data key="d0"><y:ShapeNode><y:NodeLabel>by raisercostin &amp; alexugoku (c) 2018</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="constitutie"><data key="d0"><y:ShapeNode><y:NodeLabel>constitutie</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="prefecti"><data key="d0"><y:ShapeNode><y:NodeLabel>prefecti</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="PSDNA"><data key="d0"><y:ShapeNode><y:NodeLabel>Procurorul şef al DNA</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="tribunaleSpecializate"><data key="d0"><y:ShapeNode><y:NodeLabel>tribunaleSpecializate</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legiOrganice"><data key="d0"><y:ShapeNode><y:NodeLabel>Legi Organice</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ONU"><data key="d0"><y:ShapeNode><y:NodeLabel>ONU
+Organizatia Natiunilor Unite</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="SMA"><data key="d0"><y:ShapeNode><y:NodeLabel>Statului Major al Apărării</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="executiv"><data key="d0"><y:ShapeNode><y:NodeLabel>executiv</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="procurori"><data key="d0"><y:ShapeNode><y:NodeLabel>procurori</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministrulAparariiNationale"><data key="d0"><y:ShapeNode><y:NodeLabel>ministrulAparariiNationale</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="consiliulEuropean"><data key="d0"><y:ShapeNode><y:NodeLabel>Consiliul European 
+ directia strategica care decide directia politica generala a UE. Sefii de state si de guverne ai statelor UE</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="presedinteleComisieiEuropene"><data key="d0"><y:ShapeNode><y:NodeLabel>EP
+Parlamentul European 
+ propune si implementeaza legislatia</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mt"><data key="d0"><y:ShapeNode><y:NodeLabel>mt</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="MonitorulOficial"><data key="d0"><y:ShapeNode><y:NodeLabel>MonitorulOficial</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="agentiiInformatii"><data key="d0"><y:ShapeNode><y:NodeLabel>agenţiile de informații</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="me"><data key="d0"><y:ShapeNode><y:NodeLabel>me</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="unjr"><data key="d0"><y:ShapeNode><y:NodeLabel>UNJR 
+ Uniunea Nationala a Judecatorilor din Romania</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="sefStatMajorAparare"><data key="d0"><y:ShapeNode><y:NodeLabel>sefStatMajorAparare</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="DSM"><data key="d0"><y:ShapeNode><y:NodeLabel>DSM
+Direcţia Siguranță Militară</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="presedinteSenat"><data key="d0"><y:ShapeNode><y:NodeLabel>Preşedintele Senatului</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mapn"><data key="d0"><y:ShapeNode><y:NodeLabel>mapn</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parchetCurtiApel"><data key="d0"><y:ShapeNode><y:NodeLabel>parchetCurtiApel</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parlament"><data key="d0"><y:ShapeNode><y:NodeLabel>parlament</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="CJUE"><data key="d0"><y:ShapeNode><y:NodeLabel>CJUE 
+ Curtea de Justiție a Uniunii Europene</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ms"><data key="d0"><y:ShapeNode><y:NodeLabel>ms</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="PICCJ"><data key="d0"><y:ShapeNode><y:NodeLabel>PICCJ
+PICCJ - Parchetul de pe langa Înalta Curte de Casație și Justiție.)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="minister"><data key="d0"><y:ShapeNode><y:NodeLabel>minister</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="magistrati"><data key="d0"><y:ShapeNode><y:NodeLabel>magistrati</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="consilierPrezidentialSecuritateNationala"><data key="d0"><y:ShapeNode><y:NodeLabel>consilierul prezidențial pentru securitate naţională</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="presa"><data key="d0"><y:ShapeNode><y:NodeLabel>presa</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="CCR"><data key="d0"><y:ShapeNode><y:NodeLabel>CCR
+Curtea Constitutionala a Romaniei
+9 judecatori
+9 ani</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="guvern"><data key="d0"><y:ShapeNode><y:NodeLabel>guvern</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legislativ"><data key="d0"><y:ShapeNode><y:NodeLabel>legislativ</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parchetJudecatorii"><data key="d0"><y:ShapeNode><y:NodeLabel>parchetJudecatorii</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="puteri"><data key="d0"><y:ShapeNode><y:NodeLabel>puteri</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="SIE"><data key="d0"><y:ShapeNode><y:NodeLabel>SIE
+Serviciului de Informaţii Externe</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="DIM"><data key="d0"><y:ShapeNode><y:NodeLabel>DIM
+Direcția Informații Militare</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mae"><data key="d0"><y:ShapeNode><y:NodeLabel>mae</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="primari"><data key="d0"><y:ShapeNode><y:NodeLabel>primari</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="instanteMilitare"><data key="d0"><y:ShapeNode><y:NodeLabel>instanteMilitare</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="international"><data key="d0"><y:ShapeNode><y:NodeLabel>international</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="DIICOT"><data key="d0"><y:ShapeNode><y:NodeLabel>DIICOT 
+ Direcția de Investigare a Infracțiunilor de Criminalitate Organizată și Terorism</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="PG"><data key="d0"><y:ShapeNode><y:NodeLabel>Procurorul General</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mmjs"><data key="d0"><y:ShapeNode><y:NodeLabel>mmjs</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="directorulSIE"><data key="d0"><y:ShapeNode><y:NodeLabel>directorulSIE</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="CSAT"><data key="d0"><y:ShapeNode><y:NodeLabel>CSAT
+Consiliul Suprem de Apărare a Ţării</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="instanteJudecatoresti"><data key="d0"><y:ShapeNode><y:NodeLabel>Instanţe judecătoreşti</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministrulJustitiei"><data key="d0"><y:ShapeNode><y:NodeLabel>ministrulJustitiei</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="judecatorii"><data key="d0"><y:ShapeNode><y:NodeLabel>Judecatorii (188 - 11 nu functioneaza)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ICCJ"><data key="d0"><y:ShapeNode><y:NodeLabel>ÎCCJ
+Înalta Curte de Casație și Justiție 
+ (pana in 2003 - CSJ - Curtea Supremă de Justiție)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="STS"><data key="d0"><y:ShapeNode><y:NodeLabel>STS
+Serviciul de Telecomunicații Speciale</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="DGIA"><data key="d0"><y:ShapeNode><y:NodeLabel>DGIA
+Direcția Generală de Informații a Apărării</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mcsi"><data key="d0"><y:ShapeNode><y:NodeLabel>mcsi</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="comisiaEuropeana"><data key="d0"><y:ShapeNode><y:NodeLabel>CE
+Comisia Europeana 
+ propune si implementeaza legislatia, monitorizeaza tratate si functionarea zilnica a UE</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="referendum"><data key="d0"><y:ShapeNode><y:NodeLabel>referendum</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="presedinte"><data key="d0"><y:ShapeNode><y:NodeLabel>presedinte</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministri"><data key="d0"><y:ShapeNode><y:NodeLabel>ministri</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="asociatii"><data key="d0"><y:ShapeNode><y:NodeLabel>asociatii</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parlamentulEuropean"><data key="d0"><y:ShapeNode><y:NodeLabel>EP
+Parlamentul European 
+ propune si implementeaza legislatia</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parchetMilitar"><data key="d0"><y:ShapeNode><y:NodeLabel>parchetMilitar</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="map"><data key="d0"><y:ShapeNode><y:NodeLabel>map</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="consiliulUniuniiEuropene"><data key="d0"><y:ShapeNode><y:NodeLabel>Consiliul Uniunii Europene 
+ ministrii din guverne, care impart puterea bugetara si legislativa cu Parlamentul European</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legiOrdinare"><data key="d0"><y:ShapeNode><y:NodeLabel>Legi Ordinare (restul)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="tribunale"><data key="d0"><y:ShapeNode><y:NodeLabel>Tribunale (42 - pe judete)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legislatie"><data key="d0"><y:ShapeNode><y:NodeLabel>legislatie</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="SPP"><data key="d0"><y:ShapeNode><y:NodeLabel>SPP
+Serviciul de Protecţie şi Pază</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legiConstitutionale"><data key="d0"><y:ShapeNode><y:NodeLabel>Legi revizuire constitutie</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministrulAfacerilorInterne"><data key="d0"><y:ShapeNode><y:NodeLabel>ministrulAfacerilorInterne</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="DNA"><data key="d0"><y:ShapeNode><y:NodeLabel>DNA
+Departamentul National Anticoruptie
+(fost PNA - Parchetul National Anticoruptie)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="AdministratiaPrezidentiala"><data key="d0"><y:ShapeNode><y:NodeLabel>AdministratiaPrezidentiala</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="avocatulPoporului"><data key="d0"><y:ShapeNode><y:NodeLabel>avocatulPoporului</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ANI"><data key="d0"><y:ShapeNode><y:NodeLabel>ANI</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ong"><data key="d0"><y:ShapeNode><y:NodeLabel>ONG 
+ Organizatii Neguvernamentale</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministrulAfacerilorExterne"><data key="d0"><y:ShapeNode><y:NodeLabel>ministrulAfacerilorExterne</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="deputati"><data key="d0"><y:ShapeNode><y:NodeLabel>deputati</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legiParlament"><data key="d0"><y:ShapeNode><y:NodeLabel>legiParlament</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="legi"><data key="d0"><y:ShapeNode><y:NodeLabel>legi</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="presedinteDeputati"><data key="d0"><y:ShapeNode><y:NodeLabel>Preşedintele Camerei Deputaţilor</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="judecatori"><data key="d0"><y:ShapeNode><y:NodeLabel>judecatori</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="asociatiiProfesionale"><data key="d0"><y:ShapeNode><y:NodeLabel>Asociatii Profesionale</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mfp"><data key="d0"><y:ShapeNode><y:NodeLabel>mfp</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="judiciar"><data key="d0"><y:ShapeNode><y:NodeLabel>judiciar (aplică și interpretează legile)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mai"><data key="d0"><y:ShapeNode><y:NodeLabel>mai</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parchet"><data key="d0"><y:ShapeNode><y:NodeLabel>parchet</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministrulFinantelorPublice"><data key="d0"><y:ShapeNode><y:NodeLabel>ministrulFinantelorPublice</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="directorulSRI"><data key="d0"><y:ShapeNode><y:NodeLabel>directorulSRI</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="parchetTribunale"><data key="d0"><y:ShapeNode><y:NodeLabel>parchetTribunale</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="ministrulEconomiei"><data key="d0"><y:ShapeNode><y:NodeLabel>ministrulEconomiei</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="sindicate"><data key="d0"><y:ShapeNode><y:NodeLabel>sindicate</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="patronate"><data key="d0"><y:ShapeNode><y:NodeLabel>patronate</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="partide"><data key="d0"><y:ShapeNode><y:NodeLabel>partide politice</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="senatori"><data key="d0"><y:ShapeNode><y:NodeLabel>senatori</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="regulamente"><data key="d0"><y:ShapeNode><y:NodeLabel>regulamente</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="CSM"><data key="d0"><y:ShapeNode><y:NodeLabel>CSM 
+ Consiliul Superior al Magistraturii</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="IJ"><data key="d0"><y:ShapeNode><y:NodeLabel>IJ 
+ Inspectia Judiciara</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="amr"><data key="d0"><y:ShapeNode><y:NodeLabel>AMR 
+ Asociatia Magistratilor din Romania</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="consilulJudetean"><data key="d0"><y:ShapeNode><y:NodeLabel>consilulJudetean</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="europe"><data key="d0"><y:ShapeNode><y:NodeLabel>europe</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="SRI"><data key="d0"><y:ShapeNode><y:NodeLabel>SRI
+Serviciului Român de Informaţii</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="mj"><data key="d0"><y:ShapeNode><y:NodeLabel>mj</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="UE"><data key="d0"><y:ShapeNode><y:NodeLabel>UE
+Uniunea Europeana</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="primMinistru"><data key="d0"><y:ShapeNode><y:NodeLabel>primMinistru</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="cetateni"><data key="d0"><y:ShapeNode><y:NodeLabel>cetateni</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="curtiApel"><data key="d0"><y:ShapeNode><y:NodeLabel>Curti Apel (15)</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="CEDO"><data key="d0"><y:ShapeNode><y:NodeLabel>CEDO
+Curtea European a Drepturilor Omului</y:NodeLabel></y:ShapeNode></data></node>
+    <edge source="international" target="CEDO"/>
+    <edge source="international" target="UE"/>
+    <edge source="international" target="NATO"/>
+    <edge source="international" target="ONU"/>
+    <edge source="international" target="CJUE"/>
+    <edge source="international" target="europe"/>
+    <edge source="europe" target="comisiaEuropeana"/>
+    <edge source="europe" target="consiliulEuropean"/>
+    <edge source="europe" target="consiliulUniuniiEuropene"/>
+    <edge source="europe" target="parlamentulEuropean"/>
+    <edge source="europe" target="presedinteleComisieiEuropene"/>
+    <edge source="parlamentulEuropean" target="presedinteleComisieiEuropene"/>
+    <edge source="legislativ" target="parlamentulEuropean"/>
+    <edge source="legislativ" target="consiliulUniuniiEuropene"/>
+    <edge source="judiciar" target="CJUE"/>
+    <edge source="executiv" target="comisiaEuropeana"/>
+    <edge source="executiv" target="consiliulEuropean"/>
+    <edge source="puteri" target="legislativ"/>
+    <edge source="legislativ" target="parlament"/>
+    <edge source="parlament" target="deputati"/>
+    <edge source="deputati" target="presedinteDeputati"/>
+    <edge source="parlament" target="senatori"/>
+    <edge source="senatori" target="presedinteSenat"/>
+    <edge source="legislativ" target="legislatie"/>
+    <edge source="legislatie" target="constitutie"/>
+    <edge source="legislatie" target="legi"/>
+    <edge source="legi" target="legiParlament"/>
+    <edge source="legiParlament" target="legiConstitutionale"/>
+    <edge source="legiParlament" target="legiOrganice"/>
+    <edge source="legiParlament" target="legiOrdinare"/>
+    <edge source="legislatie" target="regulamente"/>
+    <edge source="parlament" target="legiParlament"/>
+    <edge source="puteri" target="executiv"/>
+    <edge source="executiv" target="presedinte"/>
+    <edge source="executiv" target="agentiiInformatii"/>
+    <edge source="executiv" target="guvern"/>
+    <edge source="guvern" target="ministri"/>
+    <edge source="ministri" target="primMinistru"/>
+    <edge source="ministri" target="ministrulAparariiNationale"/>
+    <edge source="ministri" target="ministrulAfacerilorInterne"/>
+    <edge source="ministri" target="ministrulAfacerilorExterne"/>
+    <edge source="ministri" target="ministrulJustitiei"/>
+    <edge source="ministri" target="ministrulEconomiei"/>
+    <edge source="ministri" target="ministrulFinantelorPublice"/>
+    <edge source="guvern" target="minister"/>
+    <edge source="minister" target="mapn"/>
+    <edge source="minister" target="mai"/>
+    <edge source="minister" target="mae"/>
+    <edge source="minister" target="mj"/>
+    <edge source="minister" target="mfp"/>
+    <edge source="minister" target="me"/>
+    <edge source="minister" target="ms"/>
+    <edge source="minister" target="mmjs"/>
+    <edge source="minister" target="mt"/>
+    <edge source="minister" target="mcsi"/>
+    <edge source="minister" target="map"/>
+    <edge source="ministrulAparariiNationale" target="mapn"/>
+    <edge source="ministrulAfacerilorInterne" target="mai"/>
+    <edge source="ministrulAfacerilorExterne" target="mae"/>
+    <edge source="ministrulJustitiei" target="mj"/>
+    <edge source="ministrulEconomiei" target="me"/>
+    <edge source="ministrulFinantelorPublice" target="mfp"/>
+    <edge source="CSAT" target="presedinte"/>
+    <edge source="CSAT" target="primMinistru"/>
+    <edge source="CSAT" target="ministrulAparariiNationale"/>
+    <edge source="CSAT" target="ministrulAfacerilorInterne"/>
+    <edge source="CSAT" target="ministrulAfacerilorExterne"/>
+    <edge source="CSAT" target="ministrulJustitiei"/>
+    <edge source="CSAT" target="ministrulEconomiei"/>
+    <edge source="CSAT" target="ministrulFinantelorPublice"/>
+    <edge source="CSAT" target="directorulSIE"/>
+    <edge source="CSAT" target="directorulSRI"/>
+    <edge source="CSAT" target="sefStatMajorAparare"/>
+    <edge source="CSAT" target="consilierPrezidentialSecuritateNationala"/>
+    <edge source="agentiiInformatii" target="SRI"/>
+    <edge source="agentiiInformatii" target="SIE"/>
+    <edge source="agentiiInformatii" target="STS"/>
+    <edge source="agentiiInformatii" target="SPP"/>
+    <edge source="agentiiInformatii" target="DGIA"/>
+    <edge source="ministrulAparariiNationale" target="DGIA"/>
+    <edge source="ministrulAparariiNationale" target="SMA"/>
+    <edge source="DGIA" target="DIM"/>
+    <edge source="DGIA" target="DSM"/>
+    <edge source="puteri" target="presa"/>
+    <edge source="puteri" target="cetateni"/>
+    <edge source="cetateni" target="asociatii"/>
+    <edge source="puteri" target="judiciar"/>
+    <edge source="judiciar" target="judecatori"/>
+    <edge source="magistrati" target="judecatori"/>
+    <edge source="judecatori" target="CCR"/>
+    <edge source="judecatori" target="ICCJ"/>
+    <edge source="judecatori" target="IJ"/>
+    <edge source="judecatori" target="CSM"/>
+    <edge source="instanteJudecatoresti" target="ICCJ"/>
+    <edge source="instanteJudecatoresti" target="curtiApel"/>
+    <edge source="instanteJudecatoresti" target="tribunale"/>
+    <edge source="instanteJudecatoresti" target="tribunaleSpecializate"/>
+    <edge source="instanteJudecatoresti" target="instanteMilitare"/>
+    <edge source="instanteJudecatoresti" target="judecatorii"/>
+    <edge source="curtiApel" target="tribunale"/>
+    <edge source="curtiApel" target="tribunaleSpecializate"/>
+    <edge source="parchet" target="parchetCurtiApel"/>
+    <edge source="parchet" target="parchetTribunale"/>
+    <edge source="parchet" target="parchetJudecatorii"/>
+    <edge source="parchet" target="parchetMilitar"/>
+    <edge source="parchetCurtiApel" target="curtiApel"/>
+    <edge source="parchetTribunale" target="tribunale"/>
+    <edge source="parchetJudecatorii" target="judecatorii"/>
+    <edge source="parchetMilitar" target="instanteMilitare"/>
+    <edge source="ICCJ" target="SRI"/>
+    <edge source="IJ" target="SRI"/>
+    <edge source="PICCJ" target="SRI"/>
+    <edge source="CSM" target="SRI"/>
+    <edge source="deputati" target="CCR"/>
+    <edge source="senatori" target="CCR"/>
+    <edge source="presedinte" target="CCR"/>
+    <edge source="presedinte" target="AdministratiaPrezidentiala"/>
+    <edge source="presedinte" target="CSAT"/>
+    <edge source="presedinte" target="primMinistru"/>
+    <edge source="presedinte" target="guvern"/>
+    <edge source="presedinte" target="parlament"/>
+    <edge source="presedinte" target="referendum"/>
+    <edge source="magistrati" target="procurori"/>
+    <edge source="parchet" target="DNA"/>
+    <edge source="parchet" target="PICCJ"/>
+    <edge source="DNA" target="PSDNA"/>
+    <edge source="DNA" target="PG"/>
+    <edge source="PICCJ" target="DNA"/>
+    <edge source="asociatii" target="partide"/>
+    <edge source="asociatii" target="sindicate"/>
+    <edge source="asociatii" target="patronate"/>
+    <edge source="asociatii" target="asociatiiProfesionale"/>
+    <edge source="asociatiiProfesionale" target="unjr"/>
+    <edge source="asociatiiProfesionale" target="amr"/>
+    <edge source="asociatii" target="ong"/>
+    <edge source="magistrati" target="amr"/>
+    <edge source="judecatori" target="unjr"/>
+    <edge source="CSM" target="magistrati"/>
+    <edge source="CEDO" target="ICCJ"/>
+    <edge source="PICCJ" target="ICCJ"/>
+    <edge source="constitutie" target="legi"/>
+    <edge source="legi" target="regulamente"/>
+    <edge source="legi" target="MonitorulOficial"/>
+  </graph>
+</graphml>
