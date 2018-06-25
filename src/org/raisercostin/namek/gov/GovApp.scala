@@ -1,5 +1,7 @@
 package org.raisercostin.namek.gov
 
+import scala.util.Try
+
 object GovApp {
 
   def escape(text: String) =
@@ -217,12 +219,9 @@ object GovApp {
     }
   }
 
-  def main(args: Array[String]): Unit = {
-    println("//view at http://www.webgraphviz.com/")
-    println("//various engine(dot) and formats(png-image-element) to save as png at https://dreampuf.github.io/GraphvizOnline/")
-    val graph = new Graph()
+  def graphGov: Graph = {
     //Comisia Europeană e al puterii executive. Pe lângă astea, Consiliul Uniunii Europene are rol de o a doua cameră legislativă și Consiliul European are în principal roluri executive, cred. Mai mult, nu prea se ocupă niciuna strict cu un singur tip de putere.
-
+    val graph = new Graph()
     graph.nodes.international.CEDO(label = "CEDO\nCurtea European a Drepturilor Omului")
     graph.nodes.international.UE(label = "UE\nUniunea Europeana")
     graph.nodes.international.NATO(label = "NATO\nNorth Atlantic Treaty Organization")
@@ -433,9 +432,39 @@ object GovApp {
     graph.edge.legi.regulamente.controleaza()
     graph.edge.legi.MonitorulOficial.publica()
 
+    graph
+  }
+  def graphNodes: Graph = {
+    //Comisia Europeană e al puterii executive. Pe lângă astea, Consiliul Uniunii Europene are rol de o a doua cameră legislativă și Consiliul European are în principal roluri executive, cred. Mai mult, nu prea se ocupă niciuna strict cu un singur tip de putere.
+    val graph = new Graph()
+    graph.nodes.n1
+    graph.nodes.g1.n2
+    graph.nodes.g1.n3
+    graph.nodes.g2.n4
+    graph.nodes.g2.n5
+    graph.nodes.g2.g3
+    graph.nodes.g3.n5
+
+    graph.edge.n1.g1
+    graph.edge.n1.n2
+    graph.edge.n1.n4
+    graph.edge.n2.n3
+    graph.edge.n2.g2
+    graph.edge.n2.n3
+    graph.edge.g1.g2
+    graph
+  }
+  def printToFile(content: String, location: String = "C:/Users/jtdoe/Desktop/WorkSheet.txt"):Try[Unit] =
+    Try(location).map{l=> val f = new java.io.File(l);f.getParentFile.mkdirs();f}.map(new java.io.PrintWriter(_)).map{ f => try{f.write(content)}finally{f.close}}
+
+  def main(args: Array[String]): Unit = {
+    println("//view at http://www.webgraphviz.com/")
+    println("//various engine(dot) and formats(png-image-element) to save as png at https://dreampuf.github.io/GraphvizOnline/")
+    val graph = graphNodes
     graph.nodes.by(label = "by raisercostin & alexugoku (c) 2018")
     //println(graph.toDot)
     //println(graph.toCypher)
     println(graph.toGraphml)
+    printToFile(graph.toGraphml,"target/graph.graphml")
   }
 }
