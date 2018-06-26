@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:y="http://www.yworks.com/xml/graphml"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
+    <key for="node" id="d0" yfiles.type="nodegraphics"/>
+    <graph edgedefault="undirected" id="G">
+        <node id="g2">
+            <data key="d0">
+                <y:ProxyAutoBoundsNode>
+                    <y:Realizers active="1">
+                        <y:GroupNode>
+                            <y:NodeLabel modelName="internal" modelPosition="t">g2</y:NodeLabel>
+                            <y:State closed="false"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                            <y:NodeLabel modelName="internal" modelPosition="t">g2</y:NodeLabel>
+                            <y:State closed="false"/>
+                        </y:GroupNode>
+                    </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+            </data>
+            <graph edgedefault="undirected" id="g2:">
+                <node id="n4">
+                    <data key="d0">
+                        <y:ShapeNode>
+                            <y:NodeLabel>n4</y:NodeLabel>
+                        </y:ShapeNode>
+                    </data>
+                </node>
+                <node id="g3">
+                    <data key="d0">
+                        <y:ProxyAutoBoundsNode>
+                            <y:Realizers active="1">
+                                <y:GroupNode>
+                                    <y:NodeLabel modelName="internal" modelPosition="t">g3</y:NodeLabel>
+                                    <y:State closed="false"/>
+                                </y:GroupNode>
+                                <y:GroupNode>
+                                    <y:NodeLabel modelName="internal" modelPosition="t">g3</y:NodeLabel>
+                                    <y:State closed="false"/>
+                                </y:GroupNode>
+                            </y:Realizers>
+                        </y:ProxyAutoBoundsNode>
+                    </data>
+                    <graph edgedefault="undirected" id="g3:">
+                        <node id="n5">
+                            <data key="d0">
+                                <y:ShapeNode>
+                                    <y:NodeLabel>n5</y:NodeLabel>
+                                </y:ShapeNode>
+                            </data>
+                        </node>
+                    </graph>
+                </node>
+            </graph>
+        </node>
+        <node id="n1">
+            <data key="d0">
+                <y:ShapeNode>
+                    <y:NodeLabel>n1</y:NodeLabel>
+                </y:ShapeNode>
+            </data>
+        </node>
+        <node id="g1">
+            <data key="d0">
+                <y:ProxyAutoBoundsNode>
+                    <y:Realizers active="1">
+                        <y:GroupNode>
+                            <y:NodeLabel modelName="internal" modelPosition="t">g1</y:NodeLabel>
+                            <y:State closed="false"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                            <y:NodeLabel modelName="internal" modelPosition="t">g1</y:NodeLabel>
+                            <y:State closed="false"/>
+                        </y:GroupNode>
+                    </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+            </data>
+            <graph edgedefault="undirected" id="g1:">
+                <node id="n2">
+                    <data key="d0">
+                        <y:ShapeNode>
+                            <y:NodeLabel>n2</y:NodeLabel>
+                        </y:ShapeNode>
+                    </data>
+                </node>
+                <node id="n3">
+                    <data key="d0">
+                        <y:ShapeNode>
+                            <y:NodeLabel>n3</y:NodeLabel>
+                        </y:ShapeNode>
+                    </data>
+                </node>
+            </graph>
+        </node>
+        <node id="by raisercostin &amp; alexugoku (c) 2018">
+            <data key="d0">
+                <y:ShapeNode>
+                    <y:NodeLabel>by raisercostin &amp; alexugoku (c) 2018</y:NodeLabel>
+                </y:ShapeNode>
+            </data>
+        </node>
+        <edge source="n1" target="g1"/>
+        <edge source="n1" target="n2"/>
+        <edge source="n1" target="n4"/>
+        <edge source="n2" target="n3"/>
+        <edge source="n2" target="g2"/>
+        <edge source="g1" target="g2"/>
+    </graph>
+</graphml>

@@ -63,13 +63,37 @@ object GovApp {
     }
   }
 
-  case class Node(id: String) extends WithAttributes {
+  case class Node(id: String, var subgraph: Option[Graph] = None) extends WithAttributes {
+    def parentAddSubgraphNode(nodeId: String): Node = {
+      if (subgraph.isEmpty)
+        subgraph = Some(Graph(s"$id:"))
+      subgraph.get.findOrCreateNode(nodeId)
+    }
+
     override def toDot: String = s"$id${super.toDot}"
 
     override def toCypher: String = s"CREATE ($id:Actor ${super.toCypher})"
 
-    override def toGraphml: String = //s"""<node id="$id"/>"""
-      s"""<node id="$id"><data key="d0"><y:ShapeNode><y:NodeLabel>${escapeGraphml(attr.getOrElse("label", id))}</y:NodeLabel></y:ShapeNode></data></node>"""
+    override def toGraphml: String = {
+      val nodeId = escapeGraphml(attr.getOrElse("label", id))
+      val content = if (subgraph.isEmpty)
+        s"""<y:ShapeNode><y:NodeLabel>${nodeId}</y:NodeLabel></y:ShapeNode>""".stripMargin
+      else
+        s"""
+           |        <y:ProxyAutoBoundsNode>
+           |          <y:Realizers active="0">
+           |            <y:GroupNode>
+           |              <y:NodeLabel modelName="internal" modelPosition="t">$nodeId</y:NodeLabel>
+           |              <y:State closed="false"/>
+           |            </y:GroupNode>
+           |            <y:GroupNode>
+           |              <y:NodeLabel modelName="internal" modelPosition="t">$nodeId</y:NodeLabel>
+           |              <y:State closed="true"/>
+           |            </y:GroupNode>
+           |          </y:Realizers>
+           |        </y:ProxyAutoBoundsNode>""".stripMargin
+      s"""<node id="$nodeId"><data key="d0">""" + content + s"""</data>${subgraph.map(_.toGraphml).getOrElse("")}</node>"""
+    }
   }
 
   case class Edge(src: Node, dst: Node) extends WithAttributes {
@@ -88,7 +112,7 @@ object GovApp {
 
   import scala.language.dynamics
 
-  case class Graph(var n: Set[Node] = Set(), var e: Seq[Edge] = Seq()) {
+  case class Graph(val id: String = "G", var n: Set[Node] = Set(), var e: Seq[Edge] = Seq()) {
     val nodes = new NodeBuilder(this)
     val edge = new EdgeBuilder(this)
 
@@ -100,11 +124,16 @@ object GovApp {
       }
 
     def findOrCreateNode(nodeId: String): Node =
-      n.find(_.id == nodeId).getOrElse(addNode(nodeId))
+      findNode(nodeId).getOrElse(addNode(nodeId))
+
+    private def findNode(nodeId: String): Option[Node] =
+      n.find(_.id == nodeId)
 
     def findOrCreateNodeWithParent(nodeId: String, parent: Node): Node = {
-      val node = findOrCreateNode(nodeId)
-      addEdge(parent.id, nodeId).addAttribute("label", "include").addAttribute("weight", "2").addAttribute("kind", "include")
+      //val node = findNode(nodeId)
+      //parent.getOrCreateSubgraph(nodeId).findOrCreateNode(nodeId)
+      val node = parent.parentAddSubgraphNode(nodeId)
+      //addEdge(parent.id, nodeId).addAttribute("label", "include").addAttribute("weight", "2").addAttribute("kind", "include")
       node
     }
 
@@ -140,6 +169,13 @@ object GovApp {
     //             xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
     //     http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
     def toGraphml: String =
+      s"""|  <graph id="$id" edgedefault="undirected">
+          |    ${n.map(_.toGraphml).mkString("\n    ")}
+          |    ${e.map(_.toGraphml).mkString("\n    ")}
+          |  </graph>
+          |""".stripMargin
+
+    def toFullGraphml: String =
       s"""<?xml version="1.0" encoding="UTF-8"?>
          |<graphml
          | xmlns="http://graphml.graphdrawing.org/xmlns"
@@ -147,10 +183,7 @@ object GovApp {
          | xmlns:y="http://www.yworks.com/xml/graphml"
          | xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
          |  <key for="node" id="d0" yfiles.type="nodegraphics"/>
-         |  <graph id="G" edgedefault="undirected">
-         |    ${n.map(_.toGraphml).mkString("\n    ")}
-         |    ${e.map(_.toGraphml).mkString("\n    ")}
-         |  </graph>
+         |  ${toGraphml}
          |</graphml>
          |""".stripMargin
   }
@@ -434,37 +467,45 @@ object GovApp {
 
     graph
   }
+
   def graphNodes: Graph = {
     //Comisia Europeană e al puterii executive. Pe lângă astea, Consiliul Uniunii Europene are rol de o a doua cameră legislativă și Consiliul European are în principal roluri executive, cred. Mai mult, nu prea se ocupă niciuna strict cu un singur tip de putere.
     val graph = new Graph()
     graph.nodes.n1
     graph.nodes.g1.n2
-    graph.nodes.g1.n3
-    graph.nodes.g2.n4
-    graph.nodes.g2.n5
-    graph.nodes.g2.g3
-    graph.nodes.g3.n5
+        graph.nodes.g1.n3
+       graph.nodes.g2.n4
+        graph.nodes.g2.n5
+        graph.nodes.g2.g3
+        graph.nodes.g3.n5
 
-    graph.edge.n1.g1
-    graph.edge.n1.n2
-    graph.edge.n1.n4
-    graph.edge.n2.n3
-    graph.edge.n2.g2
-    graph.edge.n2.n3
-    graph.edge.g1.g2
+        graph.edge.n1.g1
+        graph.edge.n1.n2
+        graph.edge.n1.n4
+        graph.edge.n2.n3
+        graph.edge.n2.g2
+        graph.edge.n2.n3
+        graph.edge.g1.g2
     graph
   }
-  def printToFile(content: String, location: String = "C:/Users/jtdoe/Desktop/WorkSheet.txt"):Try[Unit] =
-    Try(location).map{l=> val f = new java.io.File(l);f.getParentFile.mkdirs();f}.map(new java.io.PrintWriter(_)).map{ f => try{f.write(content)}finally{f.close}}
+
+  def printToFile(content: String, location: String = "C:/Users/jtdoe/Desktop/WorkSheet.txt"): Try[Unit] =
+    Try(location).map { l => val f = new java.io.File(l); f.getParentFile.mkdirs(); f }.map(new java.io.PrintWriter(_)).map { f => try {
+      f.write(content)
+    } finally {
+      f.close
+    }
+    }
 
   def main(args: Array[String]): Unit = {
     println("//view at http://www.webgraphviz.com/")
     println("//various engine(dot) and formats(png-image-element) to save as png at https://dreampuf.github.io/GraphvizOnline/")
     val graph = graphNodes
+    //val graph = graphGov
     graph.nodes.by(label = "by raisercostin & alexugoku (c) 2018")
     //println(graph.toDot)
     //println(graph.toCypher)
-    println(graph.toGraphml)
-    printToFile(graph.toGraphml,"target/graph.graphml")
+    println(graph.toFullGraphml)
+    printToFile(graph.toFullGraphml, "target/graph.graphml")
   }
 }
