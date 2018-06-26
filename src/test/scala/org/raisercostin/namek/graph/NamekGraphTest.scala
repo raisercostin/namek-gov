@@ -4,12 +4,75 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions._
 import org.raisercostin.jedi.Locations
 import org.raisercostin.namek.gov.GovApp
+import org.raisercostin.namek.gov.GovApp.Graph
 import org.raisercostin.utils.ObjectUtils
 
 import scala.util.Try
 
 class NamekGraphTest {
+  @Test def testAddNodeSubgraph() = {
+    val graph = new Graph()
+    graph.nodes.n1.n2
+    graph.edge.n2.n3
+
+
+    assertEquals(2,graph.n.size)
+    assertEquals(1,graph.e.size)
+    assertEquals(toPrettyString("""<graph id="G" edgedefault="undirected">
+                   |    <node id="n1"><data key="d0">
+                   |        <y:ProxyAutoBoundsNode>
+                   |          <y:Realizers active="0">
+                   |            <y:GroupNode>
+                   |              <y:NodeLabel modelName="internal" modelPosition="t">n1</y:NodeLabel>
+                   |              <y:State closed="false"/>
+                   |            </y:GroupNode>
+                   |            <y:GroupNode>
+                   |              <y:NodeLabel modelName="internal" modelPosition="t">n1</y:NodeLabel>
+                   |              <y:State closed="true"/>
+                   |            </y:GroupNode>
+                   |          </y:Realizers>
+                   |        </y:ProxyAutoBoundsNode></data>  <graph id="n1:" edgedefault="undirected">
+                   |    <node id="n2"><data key="d0"><y:ShapeNode><y:NodeLabel>n2</y:NodeLabel></y:ShapeNode></data></node>
+                   |
+                   |  </graph>
+                   |</node>
+                   |    <node id="n3"><data key="d0"><y:ShapeNode><y:NodeLabel>n3</y:NodeLabel></y:ShapeNode></data></node>
+                   |    <edge source="n2" target="n3"/>
+                   |  </graph>""".stripMargin),toPrettyString(graph.toGraphml))
+  }
+  @Test def testBug1() = {
+    val graph = new Graph()
+    graph.nodes.n1.n2
+    graph.nodes.n1.n2.n3
+    graph.nodes.n1.n2.n4
+    graph.edge.n1.n3
+    assertEquals(1, graph.e.size)
+    assertEquals(toPrettyString("""<graph id="G" edgedefault="undirected">
+                                  |    <node id="n1"><data key="d0">
+                                  |        <y:ProxyAutoBoundsNode>
+                                  |          <y:Realizers active="0">
+                                  |            <y:GroupNode>
+                                  |              <y:NodeLabel modelName="internal" modelPosition="t">n1</y:NodeLabel>
+                                  |              <y:State closed="false"/>
+                                  |            </y:GroupNode>
+                                  |            <y:GroupNode>
+                                  |              <y:NodeLabel modelName="internal" modelPosition="t">n1</y:NodeLabel>
+                                  |              <y:State closed="true"/>
+                                  |            </y:GroupNode>
+                                  |          </y:Realizers>
+                                  |        </y:ProxyAutoBoundsNode></data>  <graph id="n1:" edgedefault="undirected">
+                                  |    <node id="n2"><data key="d0"><y:ShapeNode><y:NodeLabel>n2</y:NodeLabel></y:ShapeNode></data></node>
+                                  |
+                                  |  </graph>
+                                  |</node>
+                                  |    <node id="n3"><data key="d0"><y:ShapeNode><y:NodeLabel>n3</y:NodeLabel></y:ShapeNode></data></node>
+                                  |    <edge source="n2" target="n3"/>
+                                  |  </graph>""".stripMargin),toPrettyString(graph.toGraphml))
+  }
+
+
   @Test def test1() = {
+    Locations.file("target\\graph.graphml").writeContent(toPrettyString(GovApp.graphNodes.toFullGraphml).get)
     assertEquals(toPrettyString(Locations.classpath("sample1-expected.graphml").readContent),toPrettyString(GovApp.graphNodes.toFullGraphml))
   }
 

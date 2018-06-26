@@ -9,3 +9,6 @@
 
 # Notes
 - See in samples multiple vectorial graphical formats. It would be nice to find one where you describe minimal things like connect center of first form to center of second form.
+
+
+- in yed save as png with 5000

@@ -64,6 +64,12 @@ object GovApp {
   }
 
   case class Node(id: String, var subgraph: Option[Graph] = None) extends WithAttributes {
+    def findNode(nodeId: String): Option[Node] =
+      if (nodeId == id)
+        Some(this)
+      else
+        subgraph.flatMap(_.findNodeInAllGraph(nodeId))
+
     def parentAddSubgraphNode(nodeId: String): Node = {
       if (subgraph.isEmpty)
         subgraph = Some(Graph(s"$id:"))
@@ -92,9 +98,10 @@ object GovApp {
            |            </y:GroupNode>
            |          </y:Realizers>
            |        </y:ProxyAutoBoundsNode>""".stripMargin
-      s"""<node id="$nodeId"><data key="d0">""" + content + s"""</data>${subgraph.map(_.toGraphml).getOrElse("")}</node>"""
+      s"""<node id="$id"><data key="key-node-label">""" + content + s"""</data>${subgraph.map(_.toGraphml).getOrElse("")}</node>"""
     }
   }
+
 
   case class Edge(src: Node, dst: Node) extends WithAttributes {
     override def attributes: Map[String, String] =
@@ -105,9 +112,19 @@ object GovApp {
 
     override def toDot: String = s"""${src.id}->${dst.id}${super.toDot}"""
 
-    override def toCypher: String = s"""CREATE (${src.id})-[:${attr.get("kind").getOrElse("")}${super.toCypher}]->(${dst.id})"""
+    override def toCypher: String = s"""CREATE (${src.id})-[:$label${super.toCypher}]->(${dst.id})"""
 
-    override def toGraphml: String = s"""<edge source="${src.id}" target="${dst.id}"/>"""
+    override def toGraphml: String =
+      s"""<edge source="${src.id}" target="${dst.id}">
+         |<data key="key-edge-label">
+         |  <y:PolyLineEdge>
+         |    <y:Arrows source="none" target="standard"/>
+         |    <y:EdgeLabel modelName="six_pos" modelPosition="ttail" preferredPlacement="source">$label</y:EdgeLabel>
+         |    <y:BendStyle smoothed="false"/>
+         |  </y:PolyLineEdge>
+         |</data></edge>""".stripMargin
+
+    def label:String = attr.get("kind").getOrElse("")
   }
 
   import scala.language.dynamics
@@ -124,10 +141,13 @@ object GovApp {
       }
 
     def findOrCreateNode(nodeId: String): Node =
-      findNode(nodeId).getOrElse(addNode(nodeId))
+      findNodeInAllGraph(nodeId).getOrElse(addNode(nodeId))
 
     private def findNode(nodeId: String): Option[Node] =
       n.find(_.id == nodeId)
+
+    def findNodeInAllGraph(nodeId: String): Option[Node] =
+      n.toStream.flatMap(_.findNode(nodeId)).headOption
 
     def findOrCreateNodeWithParent(nodeId: String, parent: Node): Node = {
       //val node = findNode(nodeId)
@@ -182,7 +202,8 @@ object GovApp {
          | xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          | xmlns:y="http://www.yworks.com/xml/graphml"
          | xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
-         |  <key for="node" id="d0" yfiles.type="nodegraphics"/>
+         |  <key for="node" id="key-node-label" yfiles.type="nodegraphics"/>
+         |  <key for="edge" id="key-edge-label" yfiles.type="edgegraphics"/>
          |  ${toGraphml}
          |</graphml>
          |""".stripMargin
@@ -195,10 +216,10 @@ object GovApp {
  xmlns:y="http://www.yworks.com/xml/graphml"
  xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
 
-  <key for="node" id="d0" yfiles.type="nodegraphics"/>
+  <key for="node" id="key-node-label" yfiles.type="nodegraphics"/>
 
   <graph id="G" edgedefault="directed">
-    <node id="a"><data key="d0"><y:ShapeNode><y:NodeLabel>a</y:NodeLabel></y:ShapeNode></data></node>
+    <node id="a"><data key="key-node-label"><y:ShapeNode><y:NodeLabel>a</y:NodeLabel></y:ShapeNode></data></node>
 
   </graph>
 </graphml>
@@ -473,39 +494,40 @@ object GovApp {
     val graph = new Graph()
     graph.nodes.n1
     graph.nodes.g1.n2
-        graph.nodes.g1.n3
-       graph.nodes.g2.n4
-        graph.nodes.g2.n5
-        graph.nodes.g2.g3
-        graph.nodes.g3.n5
+    graph.nodes.g1.n3
+    graph.nodes.g2.n4
+    graph.nodes.g2.n5
+    graph.nodes.g2.g3
+    graph.nodes.g3.n5
 
-        graph.edge.n1.g1
-        graph.edge.n1.n2
-        graph.edge.n1.n4
-        graph.edge.n2.n3
-        graph.edge.n2.g2
-        graph.edge.n2.n3
-        graph.edge.g1.g2
+    graph.edge.n1.g1
+    graph.edge.n1.n2
+    graph.edge.n1.n4
+    graph.edge.n2.n3
+    graph.edge.n2.g2
+    graph.edge.n2.n3
+    graph.edge.g1.g2
     graph
   }
 
   def printToFile(content: String, location: String = "C:/Users/jtdoe/Desktop/WorkSheet.txt"): Try[Unit] =
-    Try(location).map { l => val f = new java.io.File(l); f.getParentFile.mkdirs(); f }.map(new java.io.PrintWriter(_)).map { f => try {
-      f.write(content)
-    } finally {
-      f.close
-    }
+    Try(location).map { l => val f = new java.io.File(l); f.getParentFile.mkdirs(); f }.map(new java.io.PrintWriter(_)).map { f =>
+      try {
+        f.write(content)
+      } finally {
+        f.close
+      }
     }
 
   def main(args: Array[String]): Unit = {
     println("//view at http://www.webgraphviz.com/")
     println("//various engine(dot) and formats(png-image-element) to save as png at https://dreampuf.github.io/GraphvizOnline/")
-    val graph = graphNodes
-    //val graph = graphGov
+    //val graph = graphNodes
+    val graph = graphGov
     graph.nodes.by(label = "by raisercostin & alexugoku (c) 2018")
     //println(graph.toDot)
     //println(graph.toCypher)
     println(graph.toFullGraphml)
-    printToFile(graph.toFullGraphml, "target/graph.graphml")
+    printToFile(graph.toFullGraphml, "target/graph-gov.graphml")
   }
 }

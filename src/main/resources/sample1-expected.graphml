@@ -4,6 +4,45 @@
          xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.0/ygraphml.xsd">
     <key for="node" id="d0" yfiles.type="nodegraphics"/>
     <graph edgedefault="undirected" id="G">
+        <node id="n1">
+            <data key="d0">
+                <y:ShapeNode>
+                    <y:NodeLabel>n1</y:NodeLabel>
+                </y:ShapeNode>
+            </data>
+        </node>
+        <node id="g1">
+            <data key="d0">
+                <y:ProxyAutoBoundsNode>
+                    <y:Realizers active="1">
+                        <y:GroupNode>
+                            <y:NodeLabel modelName="internal" modelPosition="t">g1</y:NodeLabel>
+                            <y:State closed="false"/>
+                        </y:GroupNode>
+                        <y:GroupNode>
+                            <y:NodeLabel modelName="internal" modelPosition="t">g1</y:NodeLabel>
+                            <y:State closed="false"/>
+                        </y:GroupNode>
+                    </y:Realizers>
+                </y:ProxyAutoBoundsNode>
+            </data>
+            <graph edgedefault="undirected" id="g1:">
+                <node id="n2">
+                    <data key="d0">
+                        <y:ShapeNode>
+                            <y:NodeLabel>n2</y:NodeLabel>
+                        </y:ShapeNode>
+                    </data>
+                </node>
+                <node id="n3">
+                    <data key="d0">
+                        <y:ShapeNode>
+                            <y:NodeLabel>n3</y:NodeLabel>
+                        </y:ShapeNode>
+                    </data>
+                </node>
+            </graph>
+        </node>
         <node id="g2">
             <data key="d0">
                 <y:ProxyAutoBoundsNode>
@@ -51,45 +90,6 @@
                             </data>
                         </node>
                     </graph>
-                </node>
-            </graph>
-        </node>
-        <node id="n1">
-            <data key="d0">
-                <y:ShapeNode>
-                    <y:NodeLabel>n1</y:NodeLabel>
-                </y:ShapeNode>
-            </data>
-        </node>
-        <node id="g1">
-            <data key="d0">
-                <y:ProxyAutoBoundsNode>
-                    <y:Realizers active="1">
-                        <y:GroupNode>
-                            <y:NodeLabel modelName="internal" modelPosition="t">g1</y:NodeLabel>
-                            <y:State closed="false"/>
-                        </y:GroupNode>
-                        <y:GroupNode>
-                            <y:NodeLabel modelName="internal" modelPosition="t">g1</y:NodeLabel>
-                            <y:State closed="false"/>
-                        </y:GroupNode>
-                    </y:Realizers>
-                </y:ProxyAutoBoundsNode>
-            </data>
-            <graph edgedefault="undirected" id="g1:">
-                <node id="n2">
-                    <data key="d0">
-                        <y:ShapeNode>
-                            <y:NodeLabel>n2</y:NodeLabel>
-                        </y:ShapeNode>
-                    </data>
-                </node>
-                <node id="n3">
-                    <data key="d0">
-                        <y:ShapeNode>
-                            <y:NodeLabel>n3</y:NodeLabel>
-                        </y:ShapeNode>
-                    </data>
                 </node>
             </graph>
         </node>
